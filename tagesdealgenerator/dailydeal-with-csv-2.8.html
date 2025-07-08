@@ -138,7 +138,7 @@
 	// Zeige den Lade-Overlay an
 	document.getElementById('loading-overlay').style.display = 'flex';
 
-	Papa.parse('shop-data.csv', {
+	Papa.parse('https://chinafreak93.github.io/cs-tools/shop-data.csv', {
 		download: true,
 		header: true,
 		complete: function(results) {
