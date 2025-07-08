@@ -1,0 +1,348 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	overflow-x: hidden;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+	background-color: #F2F2F2;
+	font-family: Source Sans Pro;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+    height: 250px;
+    background-image: url(https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/img-downloader/header.png);
+    background-size: cover;
+    background-position: center;
+	margin-bottom: 1rem;
+}
+
+div#results {
+	padding: 1rem;
+	display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+div#notFoundResults {
+    padding: 1rem;
+	color: red;
+}
+
+div#selectAllContainer {
+    padding: 0rem 1rem;
+    display: flex;
+}
+
+input#selectAllCheckbox {
+    margin-right: 5px;
+}
+
+#selectAllContainer label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.product-item {
+    border: solid 1px #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+	background-color: white;
+}
+
+.product-item .prod-img-container {
+	height: 80px;
+	margin-top: 1rem;
+	max-width: 50%;
+}
+
+.product-item > .prod-img-container img {
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    filter: drop-shadow(0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3));
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80%;
+	font-family: Source Sans Pro;
+}
+
+button {
+	padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+	font-family: Source Sans Pro;
+}
+
+button.search {
+    background-color: #006cdd;
+    color: white;
+	margin-left: 0.5rem;
+}
+
+button.download {
+    background-color: #438d33;
+    color: white;
+	max-width: 200px;
+}
+
+button.download.onetone {
+	background-color: black;
+	color: white;
+}
+
+div#tool-outer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+	grid-gap: 1rem;
+	padding-bottom: 1rem;
+}
+
+#copyright-info {
+	padding: 1rem;
+}
+
+#copyright-info > p {
+	font-size: 12px;
+	font-style: italic;
+	color: grey;
+}
+
+.button-row {
+    display: flex;
+    grid-gap: 0.5rem;
+}
+
+.div-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+button#resetButton {
+    background-color: #df0000;
+    color: white;
+}
+
+.prod-infos {
+	width: 100%;
+}
+
+.prod-infos span {
+    font-weight: bold;
+}
+
+.prod-infos p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+	display: -webkit-box;
+    -webkit-line-clamp: 2; /* Begrenze die Anzahl der Zeilen auf 2 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Erlaubt Umbrüche innerhalb der Box */
+}
+
+/* Download Progress Window Styles */
+
+#downloadProgress {
+    width: 100%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+	margin-top: 10px;
+}
+
+#downloadProgress::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px #000;
+}
+
+#downloadProgress::-webkit-progress-value {
+    background: linear-gradient(to right, #4caf50, #8bc34a);
+    border-radius: 10px;
+}
+
+#downloadProgress::-moz-progress-bar {
+    background: linear-gradient(to right, #4caf50, #8bc34a);
+    border-radius: 10px;
+}
+
+#loadingMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+	box-shadow: rgba(97, 97, 97, 0.2) 0px 6px 16px 0px;
+}
+
+#progressText {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.product-item {
+    cursor: pointer;
+	border: solid 2px white;
+	position: relative;
+}
+.product-item input[type="checkbox"] {
+    cursor: auto; /* Behält den Standard-Cursor für die Checkbox bei */
+	margin-top: 1rem;
+}
+
+.download-icon {
+    font-size: 18px;
+    color: #444444;
+    padding: 5px;
+    cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	transition: color 0.3s;
+}
+
+.download-icon:hover {
+	color: green;
+}
+
+/* Accordion Styles Start */
+
+#searchHistoryAccordion {
+	padding: 1rem;
+}
+
+#toggleHistoryButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: left;
+}
+
+#searchHistoryContainer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+#searchHistoryContainer.collapsed {
+    max-height: 0;
+}
+
+#searchHistoryContainer:not(.collapsed) {
+    max-height: 100%;
+}
+
+#searchHistoryList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-history-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-history-item:hover {
+    background: #e9ecef;
+}
+
+.history-query {
+    font-weight: bold;
+	color: gray;
+	font-size: 13px;
+	padding-left: 10px;
+}
+
+.history-time {
+    font-size: 12px;
+    color: white;
+	background-color: #444444;
+	padding: 5px;
+}
+
+#clearHistoryButton {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+}
+
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+	
+div#results {
+    grid-template-columns: repeat(3, 1fr);
+}
+	
+}
+	
+/* Mobile */
+@media (min-width: 600px) and (max-width: 767px) {
+div#results {
+    grid-template-columns: repeat(2, 1fr);
+}
+}
+/* Small Mobile */
+@media (max-width: 600px) {
+div#results {
+    grid-template-columns: repeat(1, 1fr);
+}
+}
+
+/* Download Progress Window Styles END */

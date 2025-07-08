@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produktsuche</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="img-downloader.css">
+</head>
+<body>
+	
+<div id="csvLoadingOverlay" style="position: fixed; z-index: 9999; inset: 0; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;">
+  <div class="loader"></div>
+  <div style="font-size: 1rem; color: #333;">Lade aktuelle Produktdaten, bitte warten...</div>
+</div>
+
+<style>
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #555;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+	
+<style>
+div#img-downloader-app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#copyright-info {
+    padding: 1rem;
+    margin-top: auto;
+}
+
+/* Ladebalken als Popup */
+#loadingBarContainer, #downloadLoadingBarContainer {
+    display: none;
+    position: fixed; /* Position fixed, damit es sich unabhängig vom Content verhält */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Zentriert den Ladebalken */
+    width: 50%; /* Breite des Ladebalkens anpassen */
+    background-color: rgba(0, 0, 0, 0.75); /* Dunkler Hintergrund für den Popup-Effekt */
+    padding: 20px;
+    border-radius: 10px; /* Abgerundete Ecken für einen moderneren Look */
+    z-index: 9999; /* Hoher z-index, damit es vor allem anderen angezeigt wird */
+    color: white; /* Textfarbe weiß für bessere Lesbarkeit */
+    text-align: center; /* Zentriert den Text */
+}
+
+#loadingBar, #downloadLoadingBar {
+    height: 20px;
+    background-color: #4caf50;
+    width: 0%;
+    border-radius: 5px;
+}
+
+#loadingBarPercentage, #downloadLoadingBarPercentage {
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Optional: Füge einen halbtransparenten Hintergrund für den gesamten Bildschirm hinzu */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
+    z-index: 9998; /* Etwas unter dem Ladebalken, aber vor dem restlichen Inhalt */
+}
+
+/* Return Button */
+div#return-button {
+    position: relative;
+    background-color: #f2f2f2;
+    color: black;
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    line-height: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+#return-button a {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Return Button END */
+	
+#header {
+  position: relative;
+  width: 100%;
+  padding-top: 13.02%; /* Seitenverhältnis von 250 / 1920 * 100 = 13.02% */
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("//10.8.150.10/OnlineShop/cs-tools/img-downloader/header.png");
+  background-size: cover;
+  background-position: center;
+}
+	
+/* Breakpoint für mobile Geräte */
+@media (max-width: 768px) {
+    #header {
+        padding-top: 30%; /* Angepasste Höhe für mobile Geräte */
+    }
+}
+
+</style>
+
+<div id="img-downloader-app">
+	<div id="return-button">
+		<span><i class="fas fa-arrow-left"></i> Zurück zur Toolübersicht</span>
+		<a href="\\10.8.150.10\OnlineShop\cs-tools\claudias-tools.html"></a>	
+	</div>	
+
+	<div id="header">
+  		<div class="background-image"></div>
+	</div>
+
+	<div id="tool-outer">
+		<div class="div-row">
+			<input type="text" id="articleNumbers" placeholder="Gib Artikelnummern ein...">
+			<button class="search" onclick="searchProducts()">Suchen <i class="fas fa-search"></i></button>
+		</div>
+		<div class="button-row">
+			<button id="resetButton" onclick="resetTool()" style="display: none;">Inhalte löschen <i class="fa-solid fa-trash"></i></button>
+			<button class="download" onclick="downloadAllImages()" style="display: none;">Bilder mit Artikelnummer/Namen herunterladen <i class="fa-solid fa-download"></i></button>
+			<button class="download" onclick="downloadImagesWithArticleNumbers()" style="display: none;">Bilder mit Artikelnummer herunterladen <i class="fa-solid fa-download"></i></button>
+			<button class="download onetone" onclick="downloadSpecialFormatImages()" style="display: none;">Bilder 1:1 Format herunterladen <i class="fa-solid fa-download"></i></button>
+		</div>
+	</div>
+	
+	<div id="searchHistoryAccordion">
+		<button id="toggleHistoryButton">🔍 Suchverlauf anzeigen</button>
+		<div id="searchHistoryContainer" class="collapsed">
+			<ul id="searchHistoryList"></ul>
+			<button id="clearHistoryButton" style="display:none;">🗑 Verlauf löschen</button>
+		</div>
+	</div>
+
+	<div id="notFoundResults" style="color: red;"></div>
+
+	<!-- Hier werden die Suchergebnisse angezeigt -->
+	<div id="results"></div>
+
+	<!-- Ladebalken für die Suche -->
+	<div id="loadingBarContainer">
+		<div id="loadingBar"></div>
+		<div id="loadingBarPercentage">0%</div>
+	</div>
+
+	<!-- Ladebalken für das Herunterladen -->
+	<div id="downloadLoadingBarContainer">
+		<div id="downloadLoadingBar"></div>
+		<div id="downloadLoadingBarPercentage">0%</div>
+		<button id="cancelDownloadButton" onclick="cancelDownload()">Download abbrechen</button>
+	</div>
+
+	<div id="loadingMessage" style="display: none;">
+		<p>Erstelle ZIP-Ordner...</p>
+		<progress id="downloadProgress" value="0" max="100"></progress>
+		<p id="progressText">0%</p>
+	</div>
+	
+	<div id="copyright-info"><p>© 2024 Claudia Scheurmann für MediaMarkt Schweiz AG. Alle Rechte vorbehalten. Dies ist eine MediaMarkt interne App. Diese App und ihr gesamter Inhalt, einschliesslich aller Texte, Bilder, Grafiken und Codes, sind urheberrechtlich geschützt durch MediaMarkt Schweiz AG. Die Vervielfältigung, Verbreitung, öffentliche Zugänglichmachung oder sonstige Nutzung dieser App oder ihres Inhalts ohne ausdrückliche schriftliche Genehmigung von MediaMarkt Schweiz AG ist untersagt. Für Anfragen zur Nutzung oder Lizenzierung dieser App, kontaktieren Sie bitte scheurmann@mediamarkt.ch.</p></div>
+	
+</div>
+
+<script src="img-downloader.js"></script>
+	
+<script>
+
+function showLoadingBar() {
+    document.getElementById('loadingBarContainer').style.display = 'block';
+}
+
+function hideLoadingBar() {
+    document.getElementById('loadingBarContainer').style.display = 'none';
+}
+
+// Ähnlich für den Download-Ladebalken
+	
+</script>
+
+</body>
+</html>
