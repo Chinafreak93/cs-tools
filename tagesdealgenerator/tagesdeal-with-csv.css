@@ -123,14 +123,14 @@ button {
 
 @font-face {
 	font-family: 'MM-Headline';
-	src: url('fonts/MMHeadlinePro-Regular_1.otf') format('opentype');
+	src: url('https://chinafreak93.github.io/cs-tools/fonts/MMHeadlinePro-Regular_1.otf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'MM-TextProBold';
-	src: url('fonts/MMTextProWebTT-Bold.otf') format('opentype');
+	src: url('https://chinafreak93.github.io/cs-tools/fonts/MMTextProWebTT-Bold.otf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
 }
