@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <link rel="stylesheet" href="https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/dailydeal-with-csv/tagesdeal-with-csv.css">
+    <link rel="stylesheet" href="tagesdeal-with-csv.css">
     
 	<style>
 		
@@ -138,7 +138,7 @@
 	// Zeige den Lade-Overlay an
 	document.getElementById('loading-overlay').style.display = 'flex';
 
-	Papa.parse('https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cs/shop-data.csv', {
+	Papa.parse('shop-data.csv', {
 		download: true,
 		header: true,
 		complete: function(results) {
@@ -246,7 +246,7 @@ async function mergeDataAndGenerateHTML() {
 			const prefix = isLamp ? 'old-' : '';
 			const filename = `${prefix}el-${range}-${cls}.png`;
 
-			energyLabel = `<img class="e-label" src="https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/contentful/tagesdeal-generator/ee-labels/big/${filename}">`;
+			energyLabel = `<img class="ee-labels/big/${filename}">`;
 		}
 
         let customLogoElement = '';
@@ -342,7 +342,7 @@ async function mergeDataAndGenerateHTML() {
 
     function generateFallbackLogoUrl(brand) {
         brand = brand.toUpperCase().replace(/[^A-Z0-9 ]/g, '');
-        return `https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cms/brandlogos/${brand}.png`;
+        return `brandlogos/${brand}.png`;
     }
 
     async function getImageAsBase64(url) {
@@ -419,7 +419,7 @@ async function mergeDataAndGenerateHTML() {
 
     document.getElementById('template-button').addEventListener('click', function() {
         const link = document.createElement('a');
-        link.href = 'https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/dailydeal-with-csv/tagesangebot-mit-csv-vorlage.xlsx';
+        link.href = 'tagesangebot-mit-csv-vorlage.xlsx';
         link.download = 'tagesangebot-mit-csv-vorlage.xlsx';
         document.body.appendChild(link);
         link.click();
