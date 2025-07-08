@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Spinner beim Start anzeigen
     document.getElementById('csvLoadingOverlay').style.display = 'flex';
 
-    csvLoadedPromise = fetch('shop-data.csv')
+    csvLoadedPromise = fetch('https://chinafreak93.github.io/cs-tools/shop-data.csv')
         .then(response => response.text())
         .then(data => {
             productDataCSV = data;
