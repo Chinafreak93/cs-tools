@@ -1,0 +1,405 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Black Friday Contentful Overview</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	
+<style>
+	
+@font-face {
+    font-family: 'MMHeadlinePro';
+    src: url('https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cs/MMHeadlinePro-Regular_1.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+	
+body,
+html {
+	height: 100%;
+}
+	
+body {
+    font-family: 'Noto Sans', sans-serif;
+    height: 100%;
+    background-color: #F2F2F2;
+	overflow-x: hidden;
+}
+	
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+	
+div#header {
+    display: flex;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+	width: 100%;
+}
+	
+h1 {
+    padding: 0.5rem;
+    text-align: center;
+    background-color: #DF0000;
+	font-family: 'MMHeadlinePro';
+}
+	
+h1.outlined-text.filled {
+    color: white;
+}
+	
+.outlined-text.filled::before {
+	display: none;
+}
+
+.outlined-text {
+    font-size: 60px;
+    color: #df0000;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+	
+.outlined-text::before {
+    content: "CLAUDIAS TOOLS";
+    position: absolute;
+    -webkit-text-stroke: 1px white;
+}
+
+div#content {
+    height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+	
+.content-inner {
+	display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 4 Spalten zu je 25% Breite */
+    gap: 1rem; /* Abstand zwischen den Elementen */
+	padding: 1rem;
+}
+	
+.content-box {
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	position: relative;
+	overflow: hidden;
+	border: solid 1px #ddd;
+}
+	
+.title {
+    background-color: #ddd;
+    text-align: center;
+    line-height: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
+}
+	
+	.title.main {
+	background-color: #DF0000;
+	color: white;
+	}
+	
+	.title.brand {
+	background-color: olivedrab;
+	color: white;
+	}
+	
+	.title > i {
+    font-size: 25px;
+    padding: 1rem;
+    padding-left: 0;
+	padding-right: 2rem;
+}
+	
+	.content-box h3 {
+    width: 50%;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: auto;
+    line-height: 1.1em;
+}
+	
+	.content-box .title > img {
+    max-width: 100%;
+    height: auto;
+    max-height: 85px; /* Maximale Höhe einstellen */
+    object-fit: contain;
+	padding: 0.5rem;
+	}
+	
+	.content-box p {
+		padding: 1rem;
+	}
+	
+	.cta-outer {
+    background-color: black;
+    padding: 1rem;
+    border-radius: 5rem;
+    padding: 1rem 2rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+	margin-top: 1rem;
+	font-size: 14px;
+	}
+	
+	.cta-outer span {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+	}
+	
+	.cta-outer a {
+	position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	}
+	
+	div#footer {
+    margin-top: auto;
+	padding: 1rem;
+}
+	
+	#footer p {
+    color: darkgrey;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1200px) {
+	
+.content-inner {
+	grid-template-columns: repeat(3, 1fr);
+}
+	
+}
+	
+/* Mobile */
+@media (min-width: 600px) and (max-width: 767px) {
+	.content-inner {
+	grid-template-columns: repeat(2, 1fr);
+}
+}
+/* Small Mobile */
+@media (max-width: 600px) {
+.content-inner {
+	grid-template-columns: repeat(1, 1fr);
+}
+}
+	
+/* Float */
+.hvr-float {
+  display: flex;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
+}
+	
+/* Return Button */
+div#return-button {
+    position: relative;
+    background-color: #f2f2f2;
+    color: black;
+    padding: 1rem;
+    text-align: left;
+    font-weight: bold;
+    line-height: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+#return-button a {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Return Button END */
+	
+</style>
+	
+	<div id="return-button">
+		<span><i class="fas fa-arrow-left"></i> Zurück zur Toolübersicht</span>
+		<a href="https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cs/claudias-tools.html"></a>	
+	</div>	
+	
+<div class="content-inner">
+	<div class="content-box hvr-float">
+        <div class="title main">
+            <h3>Black Friday Main</h3>
+            <i class="fas fa-layer-group"></i> <!-- Beispiel Icon für Apple -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/1HRmTtrYUzvmjyyB9NiQhs?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+    <div class="content-box hvr-float">
+        <div class="title brand">
+            <h3>Black Friday Apple Deals</h3>
+            <i class="fas fa-apple-whole"></i> <!-- Beispiel Icon für Apple -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/2nLyaJMCWunx0WzYJzIjqj?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title brand">
+            <h3>Black Friday Samsung Deals</h3>
+            <i class="fas fa-mobile-alt"></i> <!-- Beispiel Icon für Samsung -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/58Eol7ghOkN9xsbxiKDJah?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title brand">
+            <h3>Black Friday Sony Deals</h3>
+            <i class="fas fa-headphones-alt"></i> <!-- Beispiel Icon für Sony -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/7EWUj39QljIgy2LQU1tmOX?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title brand">
+            <h3>Black Friday Dyson Deals</h3>
+            <i class="fas fa-fan"></i> <!-- Beispiel Icon für Dyson -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/4zdNJzYJgiWBN1NQIXWWY?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Computer, Software und Büro Deals</h3>
+            <i class="fas fa-laptop"></i> <!-- Beispiel Icon für Computer Deals -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/2ogUspiq3vWFKQ7Tyl8UP8?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday TV und Audio Deals</h3>
+            <i class="fas fa-tv"></i> <!-- Beispiel Icon für TV und Audio Deals -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/6CqLZtodVe9rqNrGetcCTJ?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Smartphones, Handy und Navigation Deals</h3>
+            <i class="fas fa-mobile"></i> <!-- Beispiel Icon für Smartphones -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/4YN7lEv4GqwK0U7SBrhpy3?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Gaming und Spielwaren Deals</h3>
+            <i class="fas fa-gamepad"></i> <!-- Beispiel Icon für Gaming Deals -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/CAgEzdnDlWCZoEoAtkpE8?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Haushalt, Heim und Hobby Deals</h3>
+            <i class="fas fa-home"></i> <!-- Beispiel Icon für Haushalt Deals -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/6NnSsK5lddSjC4rKE5CVT0?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Küchengeräte Deals</h3>
+            <i class="fas fa-blender"></i> <!-- Beispiel Icon für Küchengeräte -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/1UK1PGe0B7Q0Zu6hw6SxzM?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Foto und E-Mobility Deals</h3>
+            <i class="fas fa-camera"></i> <!-- Beispiel Icon für Foto Deals -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/4vxmcy0hCluIp7gSlvqDzB?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+
+    <div class="content-box hvr-float">
+        <div class="title">
+            <h3>Black Friday Körperpflege und Fitness Deals</h3>
+            <i class="fas fa-heartbeat"></i> <!-- Beispiel Icon für Körperpflege und Fitness -->
+        </div>
+        <div class="cta-outer">
+            <span>In Contentful öffnen</span>
+            <a href="https://app.contentful.com/spaces/emcuyxu9plb9/environments/master/entries/6pvVUVrObtgpmwUJU11arG?focusedField=title" target="_blank"></a>
+        </div>
+    </div>
+</div>
+	
+</body>
+</html>
