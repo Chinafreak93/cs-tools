@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Converter</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #numberInput {
+            min-height: 200px;
+        }
+
+        #output {
+            min-height: 200px;
+        }
+
+        textarea,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            height: 100px;
+            resize: none;
+        }
+    </style>
+    <div id="form-container">
+        <textarea id="numberInput" placeholder="Unformatierte Zahlen hier eingeben"></textarea><br>
+        <select id="formatSelect">
+			<option value="pipe">Mit || getrennt</option>
+            <option value="comma">Mit Komma getrennt</option>
+            <option value="commaAndEmptySpace">Mit Komma und Leerschlag getrennt</option>
+        </select><br>
+        <button onclick="convert()">Konvertieren</button><br>
+        <textarea id="output" onclick="copyToClipboard(this)" readonly></textarea>
+    </div>
+    <script>
+        function convert() {
+            var input = document.getElementById("numberInput").value;
+            var format = document.getElementById("formatSelect").value;
+            var output = document.getElementById("output");
+
+            var numbers = input.split(/\s+/).filter(function (item) {
+                return item.trim() !== "";
+            });
+
+            if (format === "comma") {
+                output.value = numbers.join(",");
+            } else if (format === "commaAndEmptySpace") {
+                output.value = numbers.join(", ");
+            } else if (format === "pipe") {
+                output.value = numbers.join("||");
+            }
+        }
+
+        function copyToClipboard(textarea) {
+            textarea.select();
+            document.execCommand("copy");
+            alert("Output wurde in die Zwischenablage kopiert!");
+        }
+    </script>
+</body>
+</html>
