@@ -137,14 +137,14 @@ button {
 
 @font-face {
 	font-family: 'MM-Preise';
-	src: url('fonts/p_MediaPreise.ttf') format('opentype');
+	src: url('https://chinafreak93.github.io/cs-tools/fonts/p_MediaPreise.ttf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'MM-Icons';
-	src: url('fonts/MMIcons.ttf') format('opentype');
+	src: url('https://chinafreak93.github.io/cs-tools/fonts/MMIcons.ttf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
 }
