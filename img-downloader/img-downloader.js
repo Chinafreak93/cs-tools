@@ -376,7 +376,7 @@ function downloadImages(format = 'normal', zipName = 'images.zip') {
                     if (!response.ok) throw new Error('Download fehlgeschlagen');
                     return response.blob();
                 })
-		.then(blob => convertImageToPNGBlob(URL.createObjectURL(blob)))
+		.then(() => convertImageToPNGBlob(imgUrl))
 		.then(pngBlob => {
 		    if (!downloadAborted && !zipGenerationAborted) {
 		        zip.file(imgName, pngBlob, { binary: true });
