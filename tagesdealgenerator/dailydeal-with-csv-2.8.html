@@ -258,13 +258,14 @@ async function mergeDataAndGenerateHTML() {
         if (productTitle.startsWith(product.brand)) {
             productTitle = productTitle.slice(product.brand.length).trim();
         }
-        
-        let brandLogoUrl = product.brand_logo;
-        if (!brandLogoUrl) {
-            brandLogoUrl = generateFallbackLogoUrl(product.brand);
-            product.brand_logo = brandLogoUrl; // Update displayedData with the fallback URL
-        }
-        brandLogoUrl = await getImageAsBase64(brandLogoUrl);
+
+	let brandLogoUrl = product.brand_logo;
+	if (!brandLogoUrl) {
+	    brandLogoUrl = generateFallbackLogoUrl(product.brand);
+	    console.log('⚠️ Fallback-Brand-Logo verwendet für', product.brand, '→', brandLogoUrl);
+	    product.brand_logo = brandLogoUrl; // Update displayedData with the fallback URL
+	}
+	brandLogoUrl = await getImageAsBase64(brandLogoUrl);
 		
 		const rawStrike = parseFloat(product.strikeprice);
 		const rawPrice = parseFloat(product.price);
