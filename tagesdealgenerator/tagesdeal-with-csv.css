@@ -30,6 +30,13 @@ div#assets-downloader-tool {
 
 /* Tool Layout */
 
+#file {
+  visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 form#upload-form {
     max-width: 80%;
     margin: auto;
