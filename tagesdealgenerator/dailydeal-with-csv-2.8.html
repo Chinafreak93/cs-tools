@@ -260,10 +260,10 @@ async function mergeDataAndGenerateHTML() {
         }
 
 	let brandLogoUrl = product.brand_logo;
-	if (!brandLogoUrl) {
+	if (!brandLogoUrl || brandLogoUrl.trim() === '') {
 	    brandLogoUrl = generateFallbackLogoUrl(product.brand);
 	    console.log('⚠️ Fallback-Brand-Logo verwendet für', product.brand, '→', brandLogoUrl);
-	    product.brand_logo = brandLogoUrl; // Update displayedData with the fallback URL
+	    product.brand_logo = brandLogoUrl;
 	}
 	brandLogoUrl = await getImageAsBase64(brandLogoUrl);
 		
