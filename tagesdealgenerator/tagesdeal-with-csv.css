@@ -99,6 +99,18 @@ a {
 /* ========================================
    Drag & Drop Highlight
 ======================================== */
+#drop-zone {
+   border: 2px dashed #888;
+    border-radius: 12px;
+    padding: 3rem;
+    background: white;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    color: #555;
+    transition: border-color 0.3s;
+    cursor: pointer;  
+}
+
 #drop-zone.dragover {
   background-color: #eef6ff;
   border-color: #007bff;
@@ -109,19 +121,6 @@ a {
 ======================================== */
 #assets-downloader-tool {
   display: none;
-}
-
-/* ========================================
-   Form Layout
-======================================== */
-form#upload-form {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* ========================================
