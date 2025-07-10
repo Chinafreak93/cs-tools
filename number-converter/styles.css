@@ -1,133 +1,134 @@
 @charset "utf-8";
-/* CSS Document */
+/* Harmonisiertes CSS für Nummern-Converter – abgestimmt auf WebP-zu-PNG-Design */
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Inkludiert Padding und Border in die Elementbreite und -höhe */
-}
-
-div#content-outer {
-    width: 100%;
-    height: 100%;
-}
-
-div#content-inner {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-	margin-top: 1rem;
-    margin-bottom: 1rem;
-	flex-direction: column;
-}
-
-div#form-container {
-    width: 50%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: system-ui, sans-serif;
     margin: 0;
     padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    background-color: #f5f7fa;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    text-align: center;
 }
 
-.button-area {
+div#content-outer,
+div#content-inner {
     width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+}
+
+div#content-inner {
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    grid-gap: 20px;
-    padding-bottom: 20px;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+div#form-container {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
-    max-width: 400px;
-    padding: 20px;
+    width: 100%;
+    padding: 2rem;
     background-color: #fff;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-#numberInput, #output, textarea, select, button {
-    padding: 10px;
-    margin-bottom: 10px;
+#numberInput,
+#output,
+textarea,
+select,
+button {
+    padding: 0.6rem 1rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: #f9f9f9;
-	box-sizing: border-box;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 textarea {
-	width: 100%;
+    resize: vertical;
+    min-height: 100px;
 }
 
-#numberInput {
-    min-height: 200px;
-}
-
+#numberInput,
 #output {
     min-height: 200px;
+}
+
+.button-area {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
 }
 
 button {
     background-color: #007bff;
     color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
-    -webkit-transition: background-color 0.3s ease;
-    -o-transition: background-color 0.3s ease;
-    transition: background-color 0.3s ease;
-	margin: 0;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 button.search {
-    background-color: #444444;
-    color: white;
+    background-color: #444;
 }
 
 button.search:hover {
     background-color: black;
 }
 
-button:hover {
-    background-color: #0056b3;
+button.red {
+    background-color: red;
+}
+
+button.red.clearhistory {
+    font-size: 0.8rem;
+}
+
+button i {
+    font-size: 1em;
+}
+
+textarea#searchLinkOutput {
+    min-height: 100px;
+    margin-left: 0.5rem;
+}
+
+#searchLink {
+    display: none;
 }
 
 #output {
@@ -135,28 +136,18 @@ button:hover {
     resize: none;
 }
 
-textarea#searchLinkOutput {
-    min-height: 100px;
-	margin-left: 0.5rem;
-}
-
-#searchLink {
-    display: none;
-}
-
 #popupMessage {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    background-color: #4CAF50; /* Moderner Grünton */
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     padding: 10px;
     z-index: 1000;
     display: none;
-    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Subtiler Schatten */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Subtiler Schatten */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     font-weight: bold;
 }
 
@@ -186,84 +177,34 @@ div#return-button {
 }
 
 #conversionHistory li {
-    font-size: 14px; /* Kleiner Schriftgrad für Historieneinträge */
-    margin-bottom: 10px; /* Abstand zwischen den Einträgen */
-    list-style-type: none; /* Keine Listensymbole */
-    padding: 5px; /* Etwas Polsterung für bessere Lesbarkeit */
-    border-bottom: 1px solid #ccc; /* Eine Linie zwischen den Einträgen */
-	word-break: break-all;
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+    list-style-type: none;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    word-break: break-all;
 }
 
 #historyContainer {
-	width: 100%;
-	padding: 1rem;
+    width: 100%;
+    padding: 1rem;
 }
 
-
 .historyContainer-top {
-	margin-top: 10px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .historyContainer-top h3 {
     margin-right: 10px;
 }
 
-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-	font-weight: bold;
-	padding: 10px 15px;
-}
-
-button.red {
-    background-color: red;
-}
-
-button i {
-    font-size: 1em;
-}
-
-button.red.clearhistory {
-    font-size: 10px;
-}
-
 .restore-icon {
     cursor: pointer;
-    margin-left: 10px; /* Ein wenig Abstand vom Text */
-    color: #007bff; /* Farbe des Icons */
-}
-
-.restore-icon:hover {
-    color: #0056b3; /* Dunklere Farbe beim Hover für bessere Sichtbarkeit */
-}
-
-#conversionHistoryTable {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#conversionHistoryTable, #conversionHistoryTable th, #conversionHistoryTable td {
-    border: 1px solid #ccc;
-}
-
-#conversionHistoryTable th, #conversionHistoryTable td {
-    padding: 8px;
-    text-align: left;
-	word-break: break-all;
-}
-
-#conversionHistoryTable tr > th {
-	word-break: normal;
-}
-
-.restore-icon {
-    cursor: pointer;
+    margin-left: 10px;
     color: #007bff;
     font-size: 1.2em;
 }
@@ -272,8 +213,40 @@ button.red.clearhistory {
     color: #0056b3;
 }
 
-tbody#conversionHistory {
-    font-size: 12px;
+#conversionHistoryTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#conversionHistoryTable,
+#conversionHistoryTable th,
+#conversionHistoryTable td {
+    border: 1px solid #ccc;
+}
+
+#conversionHistoryTable th,
+#conversionHistoryTable td {
+    padding: 8px;
+    text-align: left;
+    word-break: break-all;
+}
+
+#conversionHistoryTable tr > th {
+    word-break: normal;
+}
+
+#conversionHistoryTable td span {
+    font-weight: normal;
+    display: inline-block;
+}
+
+#conversionHistoryTable td span:last-child {
+    padding-right: 0;
+}
+
+.timestamp-cell {
+    cursor: pointer;
+    color: #007bff;
 }
 
 i.fas.fa-redo.restore-icon {
@@ -282,22 +255,8 @@ i.fas.fa-redo.restore-icon {
     justify-content: center;
 }
 
-#conversionHistoryTable td span {
-    font-weight: normal;
-	display: inline-block;
-}
-
-#conversionHistoryTable td span:last-child {
-    padding-right: 0; /* Entfernt den Abstand am Ende der Zelle */
-}
-
-.timestamp-cell {
-    cursor: pointer;
-    color: #007bff; /* Hervorhebung der Interaktivität */
-}
-
 div#sortAndLayoutDropDown {
     display: flex;
-    grid-gap: 1rem;
-	padding-bottom: 1rem;
+    gap: 1rem;
+    padding-bottom: 1rem;
 }
