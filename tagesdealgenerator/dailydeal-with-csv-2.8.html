@@ -114,7 +114,9 @@
 	</div>	
 	
     <form id="upload-form">
-        <input "type="file" id="file" name="file" accept=".xlsx">
+	<label for="file" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+ 	 	<input type="file" id="file" name="file" accept=".xlsx">
+	</label>
 		<div id="drop-zone" style="padding: 2rem; border: 2px dashed #ccc; text-align: center; cursor: pointer;">
 			<i class="fa-solid fa-upload" style="font-size: 2rem; color: #888;"></i><br>
 			<strong>Datei hierher ziehen oder klicken zum Auswählen</strong>
