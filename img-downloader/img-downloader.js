@@ -304,6 +304,26 @@ function updateProgress(completedImages, totalImages, zipProgress = 0) {
     updateDownloadLoadingBar(totalProgress);
 }
 
+async function convertImageToPNGBlob(imageUrl) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob(blob => {
+                if (blob) resolve(blob);
+                else reject(new Error('PNG-Konvertierung fehlgeschlagen'));
+            }, 'image/png');
+        };
+        img.onerror = reject;
+        img.src = imageUrl;
+    });
+}
+
 function downloadImages(format = 'normal', zipName = 'images.zip') {
     const zip = new JSZip();
     const promises = [];
@@ -356,14 +376,15 @@ function downloadImages(format = 'normal', zipName = 'images.zip') {
                     if (!response.ok) throw new Error('Download fehlgeschlagen');
                     return response.blob();
                 })
-                .then(blob => {
-                    if (!downloadAborted && !zipGenerationAborted) {
-                        zip.file(imgName, blob, { binary: true });
-                        completedImages++;
-                        const progress = (completedImages / totalImages) * 100;
-                        updateDownloadLoadingBar(progress);
-                    }
-                })
+		.then(blob => convertImageToPNGBlob(URL.createObjectURL(blob)))
+		.then(pngBlob => {
+		    if (!downloadAborted && !zipGenerationAborted) {
+		        zip.file(imgName, pngBlob, { binary: true });
+		        completedImages++;
+		        const progress = (completedImages / totalImages) * 100;
+		        updateDownloadLoadingBar(progress);
+		    }
+		})
                 .catch(error => {
                     if (error.name === 'AbortError') downloadAborted = true;
                 })
