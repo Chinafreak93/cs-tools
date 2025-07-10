@@ -340,10 +340,10 @@ async function mergeDataAndGenerateHTML() {
         }
     }
 
-    function generateFallbackLogoUrl(brand) {
-        brand = brand.toUpperCase().replace(/[^A-Z0-9 ]/g, '');
-        return `brandlogos/${brand}.png`;
-    }
+function generateFallbackLogoUrl(brand) {
+    brand = brand.toUpperCase().replace(/[^A-Z0-9 ]/g, '');
+    return `https://chinafreak93.github.io/cs-tools/brandlogos/${brand}.png`;
+}
 
     async function getImageAsBase64(url) {
         const response = await fetch(url);
