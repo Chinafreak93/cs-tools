@@ -39,6 +39,12 @@ html, body {
 /* ----------------------------------------
    Layout Containers
 ---------------------------------------- */
+h1 {
+   color: #333;
+   margin-bottom: 1rem;
+   margin-top: 2rem;
+}
+
 div#img-downloader-app {
   height: 100%;
   display: flex;
