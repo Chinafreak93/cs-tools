@@ -68,11 +68,6 @@ textarea {
     min-height: 100px;
 }
 
-#numberInput,
-#output {
-    min-height: 200px;
-}
-
 .button-area {
     display: flex;
     justify-content: center;
