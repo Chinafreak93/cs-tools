@@ -464,3 +464,11 @@ function resetTool() {
 
     toggleButtons(false);
 }
+
+function showLoadingBar() {
+    document.getElementById('loadingBarContainer').style.display = 'block';
+}
+
+function hideLoadingBar() {
+    document.getElementById('loadingBarContainer').style.display = 'none';
+}
