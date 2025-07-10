@@ -19,6 +19,12 @@ body {
     text-align: center;
 }
 
+h1 {
+   color: #333;
+   margin-bottom: 1rem;
+   margin-top: 2rem;
+}
+
 div#content-outer,
 div#content-inner {
     width: 100%;
