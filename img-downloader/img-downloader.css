@@ -20,35 +20,6 @@ html, body {
 }
 
 /* ----------------------------------------
-   Header
----------------------------------------- */
-header {
-  height: 250px;
-  background-image: url(header.png);
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 1rem;
-}
-
-#header {
-  position: relative;
-  width: 100%;
-  padding-top: 13.02%;
-  overflow: hidden;
-}
-
-.background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("header.png");
-  background-size: cover;
-  background-position: center;
-}
-
-/* ----------------------------------------
    Loader Animation
 ---------------------------------------- */
 .loader {
