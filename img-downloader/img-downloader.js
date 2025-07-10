@@ -263,17 +263,19 @@ function displayResults(products) {
 
 // Hilfsfunktion: Einzelnes Bild herunterladen
 function downloadSingleImage(imageUrl, imageName) {
-    fetch(imageUrl)
-        .then(response => response.blob())
-        .then(blob => {
+    convertImageToPNGBlob(imageUrl)
+        .then(pngBlob => {
             const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
+            link.href = URL.createObjectURL(pngBlob);
             link.download = imageName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         })
-        .catch(error => console.error('Fehler beim Herunterladen:', error));
+        .catch(error => {
+            console.error('Fehler beim Konvertieren/Herunterladen des Bildes:', error);
+            alert('Bild konnte nicht konvertiert oder heruntergeladen werden.');
+        });
 }
 
 // Hilfsfunktion: Fügt einen blauen Rahmen hinzu oder entfernt ihn
