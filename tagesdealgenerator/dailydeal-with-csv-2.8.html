@@ -246,7 +246,8 @@ async function mergeDataAndGenerateHTML() {
 			const prefix = isLamp ? 'old-' : '';
 			const filename = `${prefix}el-${range}-${cls}.png`;
 
-			energyLabel = `<img class="ee-labels/big/${filename}">`;
+			const imageUrl = `https://chinafreak93.github.io/cs-tools/ee-labels/big/${filename}`;
+			energyLabel = `<img class="energy-label" src="${imageUrl}">`;
 		}
 
         let customLogoElement = '';
