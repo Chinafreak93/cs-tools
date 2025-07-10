@@ -24,7 +24,7 @@ html, body {
 ---------------------------------------- */
 header {
   height: 250px;
-  background-image: url(https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/img-downloader/header.png);
+  background-image: url(header.png);
   background-size: cover;
   background-position: center;
   margin-bottom: 1rem;
