@@ -430,3 +430,11 @@ img.e-label {
 .outer-logo .logo {
   height: 70px;
 }
+
+/* General */
+
+h1 {
+   color: #333;
+   margin-bottom: 1rem;
+   margin-top: 2rem;
+}
