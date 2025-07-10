@@ -111,6 +111,10 @@ a {
     cursor: pointer;  
 }
 
+#drop-zone i {
+   margin-bottom: 0.5rem;
+}
+
 #drop-zone.dragover {
   background-color: #eef6ff;
   border-color: #007bff;
