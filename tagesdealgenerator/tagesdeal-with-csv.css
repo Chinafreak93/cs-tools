@@ -415,6 +415,7 @@ select {
   line-height: 1.1em;
   margin-bottom: 0.5rem;
   color: white;
+   text-align: left;
 }
 
 /* Energie Label */
