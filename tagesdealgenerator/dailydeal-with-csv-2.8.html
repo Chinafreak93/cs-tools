@@ -346,8 +346,11 @@ async function mergeDataAndGenerateHTML() {
         return `brandlogos/${brand}.png`;
     }
 
-    async function getImageAsBase64(url) {
+async function getImageAsBase64(url) {
+    try {
+        console.log('🔍 Lade Bild von:', url);
         const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP-Fehler ${response.status}`);
         const blob = await response.blob();
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -355,7 +358,11 @@ async function mergeDataAndGenerateHTML() {
             reader.onerror = reject;
             reader.readAsDataURL(blob);
         });
+    } catch (err) {
+        console.error('❌ Bild konnte nicht geladen werden:', url, err);
+        return ''; // oder ein Platzhalterbild: return 'fallback.png';
     }
+}
 
     function formatPrice(price) {
         if (!price) return '';
