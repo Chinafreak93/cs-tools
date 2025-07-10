@@ -110,6 +110,7 @@ button.red {
 
 button.red.clearhistory {
     font-size: 0.8rem;
+    max-width: 160px;
 }
 
 button i {
