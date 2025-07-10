@@ -43,7 +43,8 @@ h1 {
    color: #333;
    margin-bottom: 1rem;
    margin-top: 2rem;
-   text-align: center;
+    text-align: center;
+    line-height: 1.2em;
 }
 
 div#img-downloader-app {
