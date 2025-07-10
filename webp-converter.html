@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>WebP zu PNG Konverter</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f7fa;
+      padding: 2rem;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+	  
+	button#downloadZipButton {
+    background-color: black;
+	}
+
+    #dropZone {
+      border: 2px dashed #888;
+      border-radius: 12px;
+      padding: 3rem;
+      background: white;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #555;
+      transition: border-color 0.3s;
+      cursor: pointer;
+    }
+
+    #dropZone.dragover {
+      border-color: #007bff;
+      background-color: #eef6ff;
+      color: #007bff;
+    }
+
+    #preview {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .image-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .image-container a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .image-container a:hover {
+      background: #0056b3;
+    }
+
+    .button-group {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .button-group button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button-group button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h1>WebP zu PNG Konverter</h1>
+<div id="dropZone">Ziehe deine <strong>.webp</strong>-Dateien hier rein oder klicke zum Auswählen</div>
+<input type="file" id="fileInput" accept=".webp" multiple style="display:none" />
+<div id="preview"></div>
+
+<div class="button-group">
+  <button id="downloadZipButton">Alle als ZIP herunterladen</button>
+  <button id="resetButton">Zurücksetzen</button>
+</div>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const preview = document.getElementById('preview');
+  const downloadZipButton = document.getElementById('downloadZipButton');
+  const resetButton = document.getElementById('resetButton');
+
+  let processedImages = []; // { name: 'xyz.png', blob: Blob }
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+  });
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+  });
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => {
+    handleFiles(fileInput.files);
+  });
+
+  function handleFiles(files) {
+    const fileArray = Array.from(files).filter(f => f.type === 'image/webp');
+    fileArray.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob(blob => {
+            const fileName = file.name.replace(/\.webp$/i, '.png');
+            processedImages.push({ name: fileName, blob });
+
+            const pngUrl = URL.createObjectURL(blob);
+            const container = document.createElement('div');
+            container.className = 'image-container';
+
+            const previewImg = document.createElement('img');
+            previewImg.src = e.target.result;
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = pngUrl;
+            downloadLink.download = fileName;
+            downloadLink.textContent = '⬇️ PNG herunterladen';
+
+            container.appendChild(previewImg);
+            container.appendChild(downloadLink);
+            preview.appendChild(container);
+          }, 'image/png');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  downloadZipButton.addEventListener('click', () => {
+    if (processedImages.length === 0) {
+      alert('Keine Bilder zum Herunterladen vorhanden.');
+      return;
+    }
+
+    const zip = new JSZip();
+    processedImages.forEach(item => {
+      zip.file(item.name, item.blob);
+    });
+
+    zip.generateAsync({ type: 'blob' }).then(content => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(content);
+      link.download = 'converted_images.zip';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  });
+
+  resetButton.addEventListener('click', () => {
+    preview.innerHTML = '';
+    processedImages = [];
+    fileInput.value = '';
+  });
+</script>
+
+</body>
+</html>
