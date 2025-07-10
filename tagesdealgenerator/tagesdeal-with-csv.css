@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 /* ==================================================
    Global Styles & Resets
 ================================================== */
@@ -10,12 +11,34 @@
 
 html, body {
   height: 100%;
-  background-color: #F2F2F2;
+  background-color: #f9f9f9;
   font-family: 'Source Sans Pro', sans-serif;
+  color: #333;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+/* ==================================================
+   Return Button
+================================================== */
+#return-button {
+  background-color: #fff;
+  padding: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+#return-button a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 /* ==================================================
@@ -23,34 +46,10 @@ a {
 ================================================== */
 #not-found-div {
   padding: 1rem;
-  color: red;
+  color: #e53935;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* ==================================================
-   Return Button
-================================================== */
-#return-button {
-  position: relative;
-  background-color: #f2f2f2;
-  color: black;
-  padding: 1rem;
-  text-align: left;
-  font-weight: bold;
-  line-height: 1em;
-  border-bottom: 1px solid #ddd;
-  z-index: 10000;
-}
-
-#return-button a {
-  position: absolute;
-  z-index: 10000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 /* ==================================================
@@ -62,31 +61,27 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.85);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#loading-container {
-  text-align: center;
-}
-
 #loading-spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
+  width: 60px;
+  height: 60px;
+  border: 6px solid #eee;
+  border-top: 6px solid #DF0000;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
-  margin: 0 auto;
+  animation: spin 1s linear infinite;
 }
 
 .loading-text {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #333;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
 }
 
 @keyframes spin {
@@ -98,43 +93,40 @@ a {
    Drag & Drop Highlight
 ================================================== */
 #drop-zone.dragover {
-  background-color: #f0f8ff;
-  border-color: #3498db;
-}
-
-/* ==================================================
-   Hidden Tools
-================================================== */
-#assets-downloader-tool {
-  display: none;
+  background-color: #e3f2fd;
+  border-color: #2196f3;
 }
 
 /* ==================================================
    Form Layout
 ================================================== */
 form#upload-form {
-  max-width: 80%;
-  margin: 1rem auto;
-  padding: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 1rem;
-  background-color: white;
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
 }
 
 /* ==================================================
    Buttons
 ================================================== */
 button {
-  border-radius: 50px;
-  font-weight: bold;
+  border-radius: 999px;
+  font-weight: 600;
   font-size: 16px;
-  padding: 10px 20px;
-  cursor: pointer;
+  padding: 0.75rem 1.5rem;
   border: none;
-  text-align: center;
-  box-shadow: 1px 1px 5px silver;
-  margin: auto 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
   display: inline-block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 #screenshot-button {
@@ -149,12 +141,12 @@ button {
 }
 
 #download-button {
-  background-color: black;
+  background-color: #333;
   color: white;
 }
 
 #template-button {
-  background-color: orange;
+  background-color: #FFA500;
   color: white;
 }
 
@@ -163,30 +155,50 @@ button {
 ================================================== */
 .button-row {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 /* ==================================================
    Inputs
 ================================================== */
 input:not(.row > input) {
-  background: white;
+  background: #fff;
   border: 1px solid #ccc;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: #333;
-  padding: 8px;
-  border-radius: 5px;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 8px;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  border-color: #DF0000;
+  outline: none;
 }
 
 /* ==================================================
-   Custom Fonts
+   Output Container
+================================================== */
+#output {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ==================================================
+   Hidden Tool Container
+================================================== */
+#assets-downloader-tool {
+  display: none;
+}
+
+/* ==================================================
+   Custom Fonts (wie gehabt)
 ================================================== */
 @font-face {
   font-family: 'MM-Headline';
@@ -206,227 +218,4 @@ input:not(.row > input) {
 @font-face {
   font-family: 'MM-Icons';
   src: url('https://chinafreak93.github.io/cs-tools/fonts/MMIcons.ttf') format('opentype');
-}
-
-/* ==================================================
-   Output Container (Flex)
-================================================== */
-#output {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* ==================================================
-   Tagesangebot Slider Layout
-================================================== */
-.tagesangebot-outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  overflow: hidden;
-}
-
-.tagesangebot-img {
-  width: 1094px;
-  height: 355px;
-  background-color: #DF0000;
-}
-
-/* Inner Slider Container */
-.slider-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Source Sans Pro', sans-serif;
-  height: 100%;
-  background-color: #DF0000;
-  position: relative;
-  margin: auto;
-}
-
-/* Right Side Content */
-.slider-inner .right-side {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #DF0000;
-  width: 100%;
-  padding: 0 10px;
-}
-
-.right-side img.prod-img {
-  max-width: 320px;
-  padding: 20px 20px 20px 60px;
-  filter: drop-shadow(0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3));
-  box-sizing: border-box;
-}
-
-.img-container {
-  height: 90%;
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-}
-
-.right-side .prod-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  width: 300px;
-}
-
-.right-side .prod-info span.brand {
-  font-weight: bold;
-  color: white;
-  line-height: 1em;
-}
-
-.right-side img.brand-logo {
-  max-width: 80px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-/* Info Text */
-.info-1, .info-2 {
-  font-size: 24px;
-  line-height: 1.2em;
-  padding-right: 20px;
-  max-height: 2.4em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-/* Price Box */
-.price-box {
-  background-color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5px;
-}
-
-.price-box.no-strikeprice {
-  background-color: unset;
-  padding: 0;
-  border-radius: unset;
-  margin-bottom: 0;
-}
-
-.price-box.no-strikeprice .price {
-  color: white;
-}
-
-.price-box.low-discount .before-price {
-  justify-content: flex-end;
-}
-
-.price-box.low-discount .percent {
-  display: none;
-}
-
-/* Price */
-.price {
-  font-family: 'MM-Headline';
-  font-size: 42px;
-  line-height: 1em;
-  color: #DF0000;
-  white-space: nowrap;
-}
-
-.prod-info .price sup,
-.strikeprice sup {
-  font-size: 0.7em;
-  top: -0.25em;
-  padding-left: 0.05em;
-  vertical-align: middle;
-  position: relative;
-}
-
-/* Strike Price */
-.strikeprice {
-  font-size: 22px;
-  margin: 0 5px;
-  position: relative;
-  color: black;
-  line-height: 1em;
-}
-
-.strikeprice::after {
-  content: '';
-  display: block;
-  height: 2px;
-  width: 110%;
-  background-color: black;
-  position: absolute;
-  top: 45%;
-  left: -5%;
-}
-
-/* Percent Badge */
-.percent {
-  background-color: #df0000;
-  border-radius: 17px;
-  padding: 3px 5px 5px 5px;
-  font-size: 16px;
-  font-weight: 900;
-  margin-right: 4px;
-  line-height: 14px;
-  color: white;
-  display: inline-block;
-  vertical-align: middle;
-  padding-bottom: 7px;
-}
-
-/* Before Price Flex */
-.before-price {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Headline */
-.prod-info-top {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 28px;
-  line-height: 1.1em;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-/* Energie Label */
-img.e-label {
-  max-width: 85px;
-  margin-bottom: 0.5rem;
-}
-
-/* Logo Containers */
-.div-container.small {
-  width: calc(20% - 10px);
-}
-
-.div-container.wide {
-  width: 100%;
-}
-
-.outer-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.outer-logo .logo {
-  height: 70px;
 }
