@@ -456,3 +456,13 @@ h1 {
     text-align: center;
     line-height: 1.2em;
 }
+
+#copyright-info {
+	padding: 1rem;
+}
+
+#copyright-info > p {
+	font-size: 12px;
+	font-style: italic;
+	color: grey;
+}
