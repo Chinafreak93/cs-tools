@@ -2,7 +2,8 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -86,6 +87,13 @@ body {
   flex-grow: 1;
   border: none;
   height: 100%;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .content,
+.sidebar.collapsed + #toggleSidebarBtn + .content {
+  margin-left: 60px;
 }
 
 /* Mobile-Hamburger */
@@ -113,10 +121,11 @@ body {
   .sidebar {
     display: none;
     width: 220px;
-    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
     position: fixed;
-    top: 10px;
-    left: 50px; /* direkt rechts neben dem Hamburger */
+    top: 60px;
+    left: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
@@ -149,6 +158,7 @@ body {
   }
 
   .content {
+    margin-left: 0;
     height: 100vh;
   }
 }
