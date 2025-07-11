@@ -355,7 +355,7 @@ async function getImageAsBase64(url) {
 function checkScreenWidth() {
     const warning = document.getElementById('screen-warning');
     if (window.innerWidth < 1094) {
-        warning.textContent = '⚠️ Dein Fenster ist zu schmal. Bitte auf mindestens 1094 px vergrössern, um das ganze Tagesangebot korrekt darzustellen.';
+        warning.textContent = '⚠️ Dein Browser-Fenster ist zu schmal. Bitte auf mindestens 1094px vergrössern, um das ganze Tagesangebot korrekt zu generieren.';
         warning.style.display = 'block';
     } else {
         warning.style.display = 'none';
