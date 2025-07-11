@@ -135,6 +135,7 @@ body {
   .sidebar.mobile-open {
     display: flex;
     flex-direction: column;
+    height: auto;
   }
 
   .sidebar h2 {
