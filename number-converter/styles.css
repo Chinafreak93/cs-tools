@@ -258,3 +258,13 @@ div#sortAndLayoutDropDown {
     gap: 1rem;
     padding-bottom: 1rem;
 }
+
+#copyright-info {
+	padding: 1rem;
+}
+
+#copyright-info > p {
+	font-size: 12px;
+	font-style: italic;
+	color: grey;
+}
