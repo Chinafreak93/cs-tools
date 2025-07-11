@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="cs-tools.css">
 </head>
 <body>
+  <!-- Hamburger Button nur für Mobil -->
+  <button id="mobileMenuBtn" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+
   <div class="sidebar" id="sidebar">
     <h2>Tools Übersicht</h2>
     <button onclick="loadTool('img-downloader/img-downloader-v2.2.html')">
@@ -24,7 +29,7 @@
     </button>
   </div>
 
-  <!-- Toggle Button mit Icon -->
+  <!-- Desktop Toggle Button -->
   <button id="toggleSidebarBtn" onclick="toggleSidebar()">
     <i class="fas fa-angle-left"></i>
   </button>
@@ -34,6 +39,7 @@
   <script>
     function loadTool(path) {
       document.getElementById('toolFrame').src = path;
+      closeMobileMenu(); // Menü schliessen auf Mobil
     }
 
     function toggleSidebar() {
@@ -42,6 +48,14 @@
       sidebar.classList.toggle('collapsed');
       icon.classList.toggle('fa-angle-left');
       icon.classList.toggle('fa-angle-right');
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('sidebar').classList.toggle('mobile-open');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('sidebar').classList.remove('mobile-open');
     }
   </script>
 </body>
