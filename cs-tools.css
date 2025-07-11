@@ -12,6 +12,12 @@ body {
   padding: 20px;
   box-sizing: border-box;
   transition: width 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  overflow-y: auto;
 }
 
 .sidebar.collapsed {
@@ -54,7 +60,6 @@ body {
   background-color: #eaeaea;
 }
 
-/* Nur das Emoji anzeigen, Text ausblenden */
 .sidebar.collapsed button span.text {
   display: none;
 }
@@ -86,38 +91,39 @@ body {
 /* Mobile-Hamburger */
 #mobileMenuBtn {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px;
   z-index: 1100;
   background: #f4f4f4;
   border: 1px solid #ccc;
   padding: 8px 10px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 /* Mobilversion */
 @media (max-width: 768px) {
   body {
     flex-direction: column;
+    height: auto;
   }
 
   .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-    flex-direction: row;
     display: none;
-    flex-wrap: wrap;
+    width: 220px;
+    height: auto;
+    position: fixed;
+    top: 10px;
+    left: 50px; /* direkt rechts neben dem Hamburger */
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    flex-direction: column;
+    flex-wrap: nowrap;
     background-color: #f4f4f4;
     z-index: 1000;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    padding: 10px;
   }
 
   .sidebar.mobile-open {
@@ -143,6 +149,6 @@ body {
   }
 
   .content {
-    height: calc(100vh - 50px);
+    height: 100vh;
   }
 }
