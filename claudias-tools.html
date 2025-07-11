@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claudias Tool Übersicht</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="cs-tools.css">
 </head>
 <body>
@@ -15,7 +16,10 @@
     <button onclick="loadTool('webp-converter.html')">🔄 <span class="text">WEBP Converter</span></button>
   </div>
 
-  <button id="toggleSidebarBtn" onclick="toggleSidebar()"><</button>
+  <!-- Toggle Button mit Icon -->
+  <button id="toggleSidebarBtn" onclick="toggleSidebar()">
+    <i class="fas fa-angle-left"></i>
+  </button>
 
   <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
 
@@ -26,9 +30,10 @@
 
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
-      const btn = document.getElementById('toggleSidebarBtn');
+      const icon = document.querySelector('#toggleSidebarBtn i');
       sidebar.classList.toggle('collapsed');
-      btn.innerText = sidebar.classList.contains('collapsed') ? '>' : '<';
+      icon.classList.toggle('fa-angle-left');
+      icon.classList.toggle('fa-angle-right');
     }
   </script>
 </body>
