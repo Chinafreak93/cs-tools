@@ -13,7 +13,6 @@ html, body {
   height: 100%;
   background-color: #f5f7fa;
   font-family: system-ui, sans-serif;
-  text-align: center;
 }
 
 a {
@@ -109,6 +108,7 @@ a {
     color: #555;
     transition: border-color 0.3s;
     cursor: pointer;  
+    text-align: center;
 }
 
 #drop-zone i {
