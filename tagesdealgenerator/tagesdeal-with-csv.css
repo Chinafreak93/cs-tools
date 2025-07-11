@@ -470,3 +470,10 @@ h1 {
 	font-style: italic;
 	color: grey;
 }
+#screen-warning {
+    padding: 1rem;
+    width: 50%;
+    text-align: center;
+    margin: auto auto 1rem;
+    background-color: yellow;
+}
