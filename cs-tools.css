@@ -41,3 +41,40 @@
       border: none;
       height: 100%;
     }
+
+/* Toggle Button */
+#toggleSidebarBtn {
+  position: absolute;
+  top: 10px;
+  left: 260px;
+  z-index: 1000;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  transition: left 0.3s ease;
+  border-radius: 4px;
+}
+
+.sidebar.collapsed + #toggleSidebarBtn {
+  left: 60px;
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+  width: 50px;
+  padding: 20px 5px;
+}
+
+.sidebar.collapsed h2 {
+  display: none;
+}
+
+.sidebar.collapsed button {
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
