@@ -9,14 +9,13 @@
 <body>
   <div class="sidebar" id="sidebar">
     <h2>Tools Übersicht</h2>
-    <button onclick="loadTool('img-downloader/img-downloader-v2.2.html')">🖼️ Bild Downloader</button>
-    <button onclick="loadTool('number-converter/text-converter-1.1.html')">🔢 Number Converter</button>
-    <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html')">💥 Tagesdeal Generator</button>
-    <button onclick="loadTool('webp-converter.html')">🔄 WEBP Converter</button>
+    <button onclick="loadTool('img-downloader/img-downloader-v2.2.html')">🖼️ <span class="text">Bild Downloader</span></button>
+    <button onclick="loadTool('number-converter/text-converter-1.1.html')">🔢 <span class="text">Number Converter</span></button>
+    <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html')">💥 <span class="text">Tagesdeal Generator</span></button>
+    <button onclick="loadTool('webp-converter.html')">🔄 <span class="text">WEBP Converter</span></button>
   </div>
 
-  <!-- Toggle Button -->
-  <button id="toggleSidebarBtn" onclick="toggleSidebar()">☰</button>
+  <button id="toggleSidebarBtn" onclick="toggleSidebar()"><</button>
 
   <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
 
@@ -27,7 +26,9 @@
 
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
+      const btn = document.getElementById('toggleSidebarBtn');
       sidebar.classList.toggle('collapsed');
+      btn.innerText = sidebar.classList.contains('collapsed') ? '>' : '<';
     }
   </script>
 </body>
