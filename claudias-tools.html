@@ -37,26 +37,36 @@
   <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
 
   <script>
-    function loadTool(path) {
-      document.getElementById('toolFrame').src = path;
-      closeMobileMenu(); // Menü schliessen auf Mobil
-    }
+     function loadTool(path) {
+    document.getElementById('toolFrame').src = path;
+    closeMobileMenu(); // Menü schliessen auf Mobil
+  }
 
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const icon = document.querySelector('#toggleSidebarBtn i');
-      sidebar.classList.toggle('collapsed');
-      icon.classList.toggle('fa-angle-left');
-      icon.classList.toggle('fa-angle-right');
-    }
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const icon = document.querySelector('#toggleSidebarBtn i');
+    sidebar.classList.toggle('collapsed');
+    icon.classList.toggle('fa-angle-left');
+    icon.classList.toggle('fa-angle-right');
+  }
 
-    function toggleMobileMenu() {
-      document.getElementById('sidebar').classList.toggle('mobile-open');
-    }
+  function toggleMobileMenu() {
+    document.getElementById('sidebar').classList.toggle('mobile-open');
+  }
 
-    function closeMobileMenu() {
-      document.getElementById('sidebar').classList.remove('mobile-open');
+  function closeMobileMenu() {
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
+
+  // ⬇️ Hier kommt dein Window Resize Fix
+  window.addEventListener('resize', function () {
+    const sidebar = document.getElementById('sidebar');
+
+    // Wenn Fenster breiter als 768px wird (Desktop), entferne mobile Klasse
+    if (window.innerWidth > 768) {
+      sidebar.classList.remove('mobile-open');
     }
+  });
   </script>
 </body>
 </html>
