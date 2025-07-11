@@ -11,6 +11,8 @@
 
 body {
 min-width: 1094px;
+display: flex;
+flex-direction: column;
 }
 
 html, body {
@@ -463,6 +465,7 @@ h1 {
 
 #copyright-info {
 	padding: 1rem;
+	margin-top: auto;
 }
 
 #copyright-info > p {
@@ -474,7 +477,8 @@ h1 {
     padding: 1rem;
     width: 50%;
     text-align: center;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 1rem;
     background-color: yellow;
 }
