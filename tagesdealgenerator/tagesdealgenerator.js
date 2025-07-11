@@ -351,3 +351,16 @@ async function getImageAsBase64(url) {
 				document.getElementById('file').dispatchEvent(event);
 			}
 		});
+
+function checkScreenWidth() {
+    const warning = document.getElementById('screen-warning');
+    if (window.innerWidth < 1094) {
+        warning.textContent = '⚠️ Dein Fenster ist zu schmal. Bitte auf mindestens 1094 px vergrössern, um das ganze Tagesangebot korrekt darzustellen.';
+        warning.style.display = 'block';
+    } else {
+        warning.style.display = 'none';
+    }
+}
+
+window.addEventListener('DOMContentLoaded', checkScreenWidth);
+window.addEventListener('resize', checkScreenWidth);
