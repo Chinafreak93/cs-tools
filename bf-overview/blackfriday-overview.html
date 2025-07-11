@@ -226,36 +226,18 @@ div#content {
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
 }
-	
-/* Return Button */
-div#return-button {
-    position: relative;
-    background-color: #f2f2f2;
-    color: black;
-    padding: 1rem;
-    text-align: left;
-    font-weight: bold;
-    line-height: 1em;
-    border-bottom: 1px solid #ddd;
+
+#copyright-info {
+	padding: 1rem;
 }
 
-#return-button a {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+#copyright-info > p {
+	font-size: 12px;
+	font-style: italic;
+	color: grey;
 }
-
-/* Return Button END */
 	
 </style>
-	
-	<div id="return-button">
-		<span><i class="fas fa-arrow-left"></i> Zurück zur Toolübersicht</span>
-		<a href="https://chinafreak93.github.io/cs-tools/claudias-tools.html"></a>	
-	</div>	
 	
 <div class="content-inner">
 	<div class="content-box hvr-float">
@@ -400,6 +382,20 @@ div#return-button {
         </div>
     </div>
 </div>
+
+<div id="copyright-info">
+  <p>© <span id="currentYear">2025</span> Claudia Scheurmann für MediaMarkt Schweiz AG. Alle Rechte vorbehalten. Dies ist eine MediaMarkt interne App. Diese App und ihr gesamter Inhalt, einschliesslich aller Texte, Bilder, Grafiken und Codes, sind urheberrechtlich geschützt durch MediaMarkt Schweiz AG. Die Vervielfältigung, Verbreitung, öffentliche Zugänglichmachung oder sonstige Nutzung dieser App oder ihres Inhalts ohne ausdrückliche schriftliche Genehmigung von MediaMarkt Schweiz AG ist untersagt. Für Anfragen zur Nutzung oder Lizenzierung dieser App, kontaktieren Sie bitte scheurmann@mediamarkt.ch.</p>
+</div>
+
+<script>
+  // Automatisches Jahr einfügen
+  document.addEventListener("DOMContentLoaded", function () {
+    const yearSpan = document.getElementById("currentYear");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  });
+</script>
 	
 </body>
 </html>
