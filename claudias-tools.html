@@ -7,20 +7,27 @@
   <link rel="stylesheet" href="cs-tools.css">
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2>Tools Übersicht</h2>
     <button onclick="loadTool('img-downloader/img-downloader-v2.2.html')">🖼️ Bild Downloader</button>
     <button onclick="loadTool('number-converter/text-converter-1.1.html')">🔢 Number Converter</button>
     <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html')">💥 Tagesdeal Generator</button>
     <button onclick="loadTool('webp-converter.html')">🔄 WEBP Converter</button>
-    <!-- Weitere Buttons hier -->
   </div>
 
-<iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
-	
+  <!-- Toggle Button -->
+  <button id="toggleSidebarBtn" onclick="toggleSidebar()">☰</button>
+
+  <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
+
   <script>
     function loadTool(path) {
       document.getElementById('toolFrame').src = path;
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
     }
   </script>
 </body>
