@@ -443,3 +443,13 @@ button#resetButton {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+#copyright-info {
+	padding: 1rem;
+}
+
+#copyright-info > p {
+	font-size: 12px;
+	font-style: italic;
+	color: grey;
+}
