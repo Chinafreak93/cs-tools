@@ -474,6 +474,7 @@ h1 {
     padding: 1rem;
     width: 50%;
     text-align: center;
-    margin: auto auto 1rem;
+    margin: auto;
+    margin-bottom: 1rem;
     background-color: yellow;
 }
