@@ -379,6 +379,10 @@ button#resetButton {
   margin: 0;
 }
 
+.history-item {
+display: flex;
+}
+
 .search-history-item {
   background: #f8f9fa;
   border: 1px solid #ddd;
