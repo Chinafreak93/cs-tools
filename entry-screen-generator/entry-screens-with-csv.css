@@ -43,6 +43,21 @@ h1 {
 
 /* Spinner */
 
+#cancel-button {
+    padding: 0.5rem 1rem;
+    background-color: #999;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Noto Sans', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#cancel-button:hover {
+    background-color: #666;
+}
+
 #loading-overlay {
     position: fixed;
     top: 0;
