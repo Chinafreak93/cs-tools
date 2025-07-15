@@ -14,7 +14,6 @@ html, body {
   height: 100%;
   background-color: #f5f7fa;
   font-family: system-ui, sans-serif;
-  min-width: 1094px;
   display: flex;
   flex-direction: column;
 }
@@ -29,6 +28,17 @@ h1 {
     margin-top: 4rem;
     text-align: center;
     line-height: 1.2em;
+}
+
+#copyright-info > p {
+    font-size: 12px;
+    font-style: italic;
+    color: grey;
+}
+
+#copyright-info {
+    padding: 1rem;
+    margin-top: auto;
 }
 
 /* ========================================
