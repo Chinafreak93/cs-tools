@@ -67,8 +67,6 @@ async function mergeDataAndGenerateHTML() {
 
     for (const excelItem of excelData) {
         const excelSku = excelItem.sku ? excelItem.sku.toString().trim() : '';
-
-        // ⚠️ Wenn keine SKU im Excel → überspringen
         if (!excelSku) continue;
 
         const csvItem = csvData.find(item => item.sku && item.sku.toString().trim() === excelSku);
@@ -79,7 +77,12 @@ async function mergeDataAndGenerateHTML() {
             displayedData.push(mergedItem);
         } else {
             console.log('Produkt in CSV nicht gefunden:', excelSku);
-            displayedData.push(excelItem);
+
+            // Nur übernehmen, wenn image_link befüllt ist
+            if (excelItem.image_link && excelItem.image_link.trim() !== '') {
+                displayedData.push(excelItem);
+            }
+
             notFoundSkus.push(excelSku);
         }
     }
@@ -87,16 +90,19 @@ async function mergeDataAndGenerateHTML() {
     document.getElementById('output').innerHTML = '';
     imageElements = [];
 
-	for (const item of displayedData) {
-    const sku = item.sku ? item.sku.toString().trim() : '';
-    if (!sku) continue; // 👉 nur Produkte mit gültiger SKU anzeigen
-    await generateHTML(item);
-	}
+    for (const item of displayedData) {
+        const sku = item.sku ? item.sku.toString().trim() : '';
+        if (!sku) continue;
 
-    // ✅ Doppelte SKUs entfernen
+        // Falls kein image_link vorhanden ist → Element überspringen
+        if (!item.image_link || item.image_link.trim() === '') continue;
+
+        await generateHTML(item);
+    }
+
+    // Doppelte SKUs aus der Anzeige der fehlenden Artikelnummern entfernen
     const uniqueNotFoundSkus = [...new Set(notFoundSkus)];
 
-    // Anzeige nicht gefundener SKUs
     const notFoundDiv = document.getElementById('not-found-div');
     if (uniqueNotFoundSkus.length > 0) {
         notFoundDiv.innerHTML = `
