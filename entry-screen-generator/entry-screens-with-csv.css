@@ -37,6 +37,20 @@ form#upload-form {
   margin-bottom: 1rem;
 }
 
+#drop-zone {
+    border: 2px dashed #ccc;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+}
+
+#drop-zone.dragover {
+    background-color: #f0f0f0;
+}
+
 /* ========================================
    Output
 ======================================== */
