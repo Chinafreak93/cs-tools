@@ -26,16 +26,6 @@ a {
 /* ========================================
    Form Layout
 ======================================== */
-form#upload-form {
-  max-width: 80%;
-  margin: auto;
-  padding: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 1rem;
-  background-color: white;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
 
 #drop-zone {
     border: 2px dashed #ccc;
