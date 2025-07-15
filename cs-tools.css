@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   min-height: 100vh;
   overflow: hidden;
+  background-color: #f5f7fa;
 }
 
 /* --- Desktop Sidebar --- */
