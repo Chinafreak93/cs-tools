@@ -40,18 +40,21 @@
   <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
 
   <script>
-    function loadTool(path, buttonElement) {
-      const frame = document.getElementById('toolFrame');
-      frame.src = path;
-      closeMobileMenu();
+function loadTool(path, buttonElement) {
+  // Wenn der geklickte Button schon aktiv ist, nichts tun
+  if (buttonElement.classList.contains('active')) return;
 
-      // Aktiven Button markieren
-      document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
-      buttonElement.classList.add('active');
+  const frame = document.getElementById('toolFrame');
+  frame.src = path;
+  closeMobileMenu();
 
-      // Scrollen an den Anfang (falls möglich)
-      frame.contentWindow?.scrollTo?.(0, 0);
-    }
+  // Aktiven Button markieren
+  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+  buttonElement.classList.add('active');
+
+  // Scrollen an den Anfang (optional, falls nötig)
+  frame.contentWindow?.scrollTo?.(0, 0);
+}
 
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
