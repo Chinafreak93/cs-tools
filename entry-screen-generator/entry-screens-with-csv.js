@@ -246,27 +246,58 @@
             XLSX.writeFile(wb, 'displayed_data.xlsx');
         });
 
-        document.getElementById('screenshot-button').addEventListener('click', async function() {
-            const zip = new JSZip();
-            skuCount = {};
+let abortController; // global definieren
 
-            for (const element of imageElements) {
-                const sku = element.getAttribute('data-sku');
-                const promo = element.querySelector('.promo-img') ? element.querySelector('.promo-img').getAttribute('src').split('/').pop().split('.')[0] : ''; 
+document.getElementById('screenshot-button').addEventListener('click', async function () {
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const cancelButton = document.getElementById('cancel-button');
+    loadingOverlay.style.display = 'flex';
 
-                const imageName = promo ? `${sku}_${promo}.jpg` : `${sku}.jpg`;
+    abortController = new AbortController();
+    const signal = abortController.signal;
 
-                await html2canvas(element, { scale: 1 }).then(canvas => {
-                    const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
-                    const base64Data = dataUrl.split(',')[1];
-                    zip.file(imageName, base64Data, { base64: true });
-                });
-            }
+    cancelButton.onclick = () => {
+        abortController.abort(); // Vorgang abbrechen
+    };
 
-            zip.generateAsync({ type: 'blob' }).then(function(content) {
-                saveAs(content, 'screenshots.zip');
-            });
-        });
+    try {
+        const zip = new JSZip();
+        skuCount = {};
+
+        for (const element of imageElements) {
+            if (signal.aborted) throw new Error("Vorgang abgebrochen");
+
+            const sku = element.getAttribute('data-sku');
+            const promo = element.querySelector('.promo-img') ?
+                element.querySelector('.promo-img').getAttribute('src').split('/').pop().split('.')[0] : '';
+
+            const imageName = promo ? `${sku}_${promo}.jpg` : `${sku}.jpg`;
+
+            const canvas = await html2canvas(element, { scale: 1 });
+
+            if (signal.aborted) throw new Error("Vorgang abgebrochen");
+
+            const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+            const base64Data = dataUrl.split(',')[1];
+            zip.file(imageName, base64Data, { base64: true });
+        }
+
+        if (signal.aborted) throw new Error("Vorgang abgebrochen");
+
+        const content = await zip.generateAsync({ type: 'blob' });
+        saveAs(content, 'screenshots.zip');
+    } catch (error) {
+        if (signal.aborted) {
+            alert("Der Vorgang wurde abgebrochen.");
+        } else {
+            console.error("Fehler:", error);
+            alert("Ein Fehler ist aufgetreten beim Erstellen der ZIP-Datei.");
+        }
+    } finally {
+        loadingOverlay.style.display = 'none';
+        abortController = null;
+    }
+});
 
         document.getElementById('template-button').addEventListener('click', function() {
             const link = document.createElement('a');
