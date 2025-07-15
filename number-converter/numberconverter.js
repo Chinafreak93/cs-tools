@@ -35,6 +35,10 @@ function convert() {
 }
 
 function copyToClipboard(textarea) {
+    if (!textarea.value.trim()) {
+        return; // nichts tun, wenn leer
+    }
+
     textarea.select();
     document.execCommand("copy");
     showPopup("Output wurde in die Zwischenablage kopiert!");
