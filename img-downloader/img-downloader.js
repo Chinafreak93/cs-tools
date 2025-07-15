@@ -472,3 +472,20 @@ function showLoadingBar() {
 function hideLoadingBar() {
     document.getElementById('loadingBarContainer').style.display = 'none';
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const target = document.getElementById("tool-outer");
+  
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) {
+        target.classList.add("sticky-active");
+      } else {
+        target.classList.remove("sticky-active");
+      }
+    },
+    { threshold: [1.0], rootMargin: "-1px 0px 0px 0px" }
+  );
+
+  observer.observe(target);
+});
