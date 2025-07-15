@@ -54,7 +54,7 @@ div#tool-outer {
   grid-gap: 1rem;
   position: sticky;
   top: 0;
-  background: white;
+  background: #f5f7fa;
   padding: 1rem 0;
   z-index: 1000;
   border-bottom: 1px solid #ccc;
