@@ -60,32 +60,47 @@
             }
         });
 
-        async function mergeDataAndGenerateHTML() {
-            displayedData = [];
-            skuCount = {};
+async function mergeDataAndGenerateHTML() {
+    displayedData = [];
+    skuCount = {};
+    const notFoundSkus = [];
 
-            for (const excelItem of excelData) {
-                const excelSku = excelItem.sku ? excelItem.sku.toString().trim() : '';
-                const csvItem = csvData.find(item => item.sku && item.sku.toString().trim() === excelSku);
-                if (csvItem) {
-                    console.log('Übereinstimmendes Produkt gefunden:', csvItem);
-                    let mergedItem = { ...csvItem, ...excelItem };
-                    displayedData.push(mergedItem);
-                } else {
-                    console.log('Produkt in CSV nicht gefunden:', excelSku);
-                    displayedData.push(excelItem);
-                }
-            }
-
-            document.getElementById('output').innerHTML = '';
-            imageElements = [];
-            for (const item of displayedData) {
-                await generateHTML(item);
-            }
-
-            document.getElementById('download-button').disabled = false;
-            document.getElementById('screenshot-button').disabled = false;
+    for (const excelItem of excelData) {
+        const excelSku = excelItem.sku ? excelItem.sku.toString().trim() : '';
+        const csvItem = csvData.find(item => item.sku && item.sku.toString().trim() === excelSku);
+        if (csvItem) {
+            console.log('Übereinstimmendes Produkt gefunden:', csvItem);
+            let mergedItem = { ...csvItem, ...excelItem };
+            displayedData.push(mergedItem);
+        } else {
+            console.log('Produkt in CSV nicht gefunden:', excelSku);
+            displayedData.push(excelItem);
+            notFoundSkus.push(excelSku);
         }
+    }
+
+    document.getElementById('output').innerHTML = '';
+    imageElements = [];
+    for (const item of displayedData) {
+        await generateHTML(item);
+    }
+
+    // Anzeige nicht gefundener SKUs
+    const notFoundDiv = document.getElementById('not-found-div');
+    if (notFoundSkus.length > 0) {
+        notFoundDiv.innerHTML = `
+            <div class="not-found-warning">
+                <strong>Folgende Artikelnummern wurden im CSV nicht gefunden:</strong><br>
+                ${notFoundSkus.join(', ')}
+            </div>
+        `;
+    } else {
+        notFoundDiv.innerHTML = '';
+    }
+
+    document.getElementById('download-button').disabled = false;
+    document.getElementById('screenshot-button').disabled = false;
+}
 
     async function generateHTML(product) {
 		let energyLabel = '';
