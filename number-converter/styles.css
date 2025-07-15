@@ -265,6 +265,10 @@ div#sortAndLayoutDropDown {
     padding-bottom: 1rem;
 }
 
+div#sortAndLayoutDropDown select {
+margin-bottom: 0;
+}
+
 #copyright-info {
 	padding: 1rem;
 }
