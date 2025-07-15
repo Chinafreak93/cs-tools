@@ -5,6 +5,14 @@ body {
   overflow: hidden;
 }
 
+body.dark-theme {
+  background: #121212;
+  color: #f0f0f0;
+}
+.sidebar.dark-theme {
+  background: #1e1e1e;
+}
+
 /* --- Desktop Sidebar --- */
 .sidebar {
   width: 250px;
