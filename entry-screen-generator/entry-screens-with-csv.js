@@ -87,15 +87,19 @@
             document.getElementById('screenshot-button').disabled = false;
         }
 
-        async function generateHTML(product) {
-            let energyLabel = '';
-            if (product.energy_efficiency_class) {
-                if (isValidUrl(product.energy_efficiency_class)) {
-                    energyLabel = `<img class="e-label" src="${product.energy_efficiency_class}">`;
-                } else {
-                    energyLabel = `<img class="e-label" src="https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/contentful/tagesdeal-generator/ee-labels/big/EEK_${product.energy_efficiency_class}_Spektrum_A_G.png">`;
-                }
-            }
+    async function generateHTML(product) {
+		let energyLabel = '';
+		if (product.energy_efficiency_class_range && product.energy_efficiency_class) {
+			const range = product.energy_efficiency_class_range.trim().toLowerCase().replace(/\s+/g, '').replace(/\+/g, 'p');
+			const cls = product.energy_efficiency_class.trim().toLowerCase().replace(/\s+/g, '').replace(/\+/g, 'p');
+			const isLamp = product.category_department && product.category_department.trim().toLowerCase() === 'lampen & leuchten';
+
+			const prefix = isLamp ? 'old-' : '';
+			const filename = `${prefix}el-${range}-${cls}.png`;
+
+			const imageUrl = `https://chinafreak93.github.io/cs-tools/ee-labels/big/${filename}`;
+			energyLabel = `<img class="e-label" src="${imageUrl}">`;
+		}
 
             let customLogoElement = '';
             if (product['custom_logo_url']) {
@@ -119,7 +123,7 @@
 
             let promoImage = '';
             if (product.promo) {
-                const promoImageUrl = `https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/entry-screens-with-csv/pos-wallpaper-top/${getPromoImageName(product.promo)}.jpg`;
+                const promoImageUrl = `https://chinafreak93.github.io/cs-tools/entry-screen-generator/pos-wallpaper-top/${getPromoImageName(product.promo)}.jpg`;
                 promoImage = `<img class="promo-img" src="${promoImageUrl}">`;
             }
 
@@ -191,7 +195,7 @@
 
         function generateFallbackLogoUrl(brand) {
             brand = brand.toUpperCase().replace(/[^A-Z0-9 ]/g, '');
-            return `https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cms/brandlogos/${brand}.png`;
+            return `https://chinafreak93.github.io/cs-tools/brandlogos/${brand}.png`;
         }
 
         async function getImageAsBase64(url) {
@@ -266,7 +270,7 @@
 
         document.getElementById('template-button').addEventListener('click', function() {
             const link = document.createElement('a');
-            link.href = 'https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/entry-screens-with-csv/entry-screen-mit-csv-vorlage.xlsx';
+            link.href = 'https://chinafreak93.github.io/cs-tools/entry-screens-generator/entry-screen-mit-csv-vorlage.xlsx';
             link.download = 'entry-screen-mit-csv-vorlage.xlsx';
             document.body.appendChild(link);
             link.click();
