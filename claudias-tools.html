@@ -6,6 +6,22 @@
   <title>Claudias Tool Übersicht</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="cs-tools.css">
+  <style>
+    .sidebar button.active {
+      background-color: #FFBE98; /* Peach Fuzz */
+      color: #222;
+      font-weight: bold;
+      border-left: 4px solid #e38b6c;
+      cursor: default;
+    }
+    .sidebar button.active:hover {
+      background-color: #FFBE98;
+    }
+    .sidebar button:not(.active):hover {
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <!-- Hamburger Button nur für Mobil -->
@@ -15,19 +31,19 @@
 
   <div class="sidebar" id="sidebar">
     <h2>Tools Übersicht</h2>
-    <button onclick="loadTool('number-converter/text-converter-1.1.html')">
+    <button id="defaultToolBtn" onclick="loadTool('number-converter/text-converter-1.1.html', this)">
       <i class="fas fa-sort-numeric-down"></i> <span class="text">Number Converter</span>
     </button>
-    <button onclick="loadTool('img-downloader/img-downloader-v2.2.html')">
+    <button onclick="loadTool('img-downloader/img-downloader-v2.2.html', this)">
       <i class="fas fa-image"></i> <span class="text">Bild Downloader</span>
     </button>
-    <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html')">
+    <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html', this)">
       <i class="fas fa-bolt"></i> <span class="text">Tagesdeal Generator</span>
     </button>
-    <button onclick="loadTool('webp-converter.html')">
+    <button onclick="loadTool('webp-converter.html', this)">
       <i class="fas fa-arrows-rotate"></i> <span class="text">WEBP Converter</span>
     </button>
-    <button onclick="loadTool('bf-overview/blackfriday-overview.html')">
+    <button onclick="loadTool('bf-overview/blackfriday-overview.html', this)">
       <i class="fas fa-eye"></i> <span class="text">Black Friday Overview</span>
     </button>
   </div>
@@ -40,57 +56,45 @@
   <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
 
   <script>
-     function loadTool(path) {
-    document.getElementById('toolFrame').src = path;
-    closeMobileMenu(); // Menü schliessen auf Mobil
-  }
+    function loadTool(path, buttonElement) {
+      const frame = document.getElementById('toolFrame');
+      frame.src = path;
+      closeMobileMenu();
 
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const icon = document.querySelector('#toggleSidebarBtn i');
-    sidebar.classList.toggle('collapsed');
-    icon.classList.toggle('fa-angle-left');
-    icon.classList.toggle('fa-angle-right');
-  }
+      // Aktiven Button markieren
+      document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+      buttonElement.classList.add('active');
 
-  function toggleMobileMenu() {
-    document.getElementById('sidebar').classList.toggle('mobile-open');
-  }
-
-  function closeMobileMenu() {
-    document.getElementById('sidebar').classList.remove('mobile-open');
-  }
-
-  // ⬇️ Hier kommt dein Window Resize Fix
-  window.addEventListener('resize', function () {
-    const sidebar = document.getElementById('sidebar');
-
-    // Wenn Fenster breiter als 768px wird (Desktop), entferne mobile Klasse
-    if (window.innerWidth > 768) {
-      sidebar.classList.remove('mobile-open');
+      // Scrollen an den Anfang (falls möglich)
+      frame.contentWindow?.scrollTo?.(0, 0);
     }
-  });
 
-    function loadTool(path) {
-  document.getElementById('toolFrame').src = path;
-  closeMobileMenu();
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const icon = document.querySelector('#toggleSidebarBtn i');
+      sidebar.classList.toggle('collapsed');
+      icon.classList.toggle('fa-angle-left');
+      icon.classList.toggle('fa-angle-right');
+    }
 
-  // Aktiven Button markieren
-  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-}
-function loadTool(path) {
-  const frame = document.getElementById('toolFrame');
-  frame.src = path;
-  closeMobileMenu();
+    function toggleMobileMenu() {
+      document.getElementById('sidebar').classList.toggle('mobile-open');
+    }
 
-  // Aktiven Button markieren
-  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+    function closeMobileMenu() {
+      document.getElementById('sidebar').classList.remove('mobile-open');
+    }
 
-  // Scrollen an den Anfang
-  frame.contentWindow?.scrollTo?.(0, 0);
-}
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) {
+        document.getElementById('sidebar').classList.remove('mobile-open');
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      // Standard-Button als aktiv markieren
+      document.getElementById('defaultToolBtn')?.classList.add('active');
+    });
   </script>
 </body>
 </html>
