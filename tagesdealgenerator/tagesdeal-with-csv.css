@@ -18,7 +18,7 @@ flex-direction: column;
 html, body {
   height: 100%;
   background-color: #f5f7fa;
-  font-family: system-ui, sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 a {
