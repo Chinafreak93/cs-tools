@@ -135,7 +135,6 @@ body {
 @media (max-width: 768px) {
   .sidebar {
     display: none;
-    width: 220px;
     max-height: 90vh;
     overflow-y: auto;
     position: fixed;
