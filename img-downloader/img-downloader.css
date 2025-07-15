@@ -56,7 +56,6 @@ div#tool-outer {
   background: #f5f7fa;
   padding: 1rem 0;
   z-index: 1000;
-  border-bottom: 1px solid #ccc;
 }
 
 #tool-outer.sticky-active {
