@@ -87,9 +87,11 @@ async function mergeDataAndGenerateHTML() {
     document.getElementById('output').innerHTML = '';
     imageElements = [];
 
-    for (const item of displayedData) {
-        await generateHTML(item);
-    }
+	for (const item of displayedData) {
+    const sku = item.sku ? item.sku.toString().trim() : '';
+    if (!sku) continue; // 👉 nur Produkte mit gültiger SKU anzeigen
+    await generateHTML(item);
+	}
 
     // ✅ Doppelte SKUs entfernen
     const uniqueNotFoundSkus = [...new Set(notFoundSkus)];
