@@ -28,7 +28,8 @@ body {
       cursor: default;
     }
     .sidebar button.active:hover {
-      background-color: #FFBE98;
+      background-color: #F5DF4D;
+      cursor: default;
     }
     .sidebar button:not(.active):hover {
       background-color: #f0f0f0;
