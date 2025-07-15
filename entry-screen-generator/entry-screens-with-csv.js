@@ -79,7 +79,7 @@ async function mergeDataAndGenerateHTML() {
             displayedData.push(mergedItem);
         } else {
             console.log('Produkt in CSV nicht gefunden:', excelSku);
-            displayedData.push(excelItem); // manuell gepflegter Eintrag
+            displayedData.push(excelItem);
             notFoundSkus.push(excelSku);
         }
     }
@@ -91,13 +91,16 @@ async function mergeDataAndGenerateHTML() {
         await generateHTML(item);
     }
 
+    // ✅ Doppelte SKUs entfernen
+    const uniqueNotFoundSkus = [...new Set(notFoundSkus)];
+
     // Anzeige nicht gefundener SKUs
     const notFoundDiv = document.getElementById('not-found-div');
-    if (notFoundSkus.length > 0) {
+    if (uniqueNotFoundSkus.length > 0) {
         notFoundDiv.innerHTML = `
             <div class="not-found-warning">
                 <strong>Folgende Artikelnummern wurden im CSV nicht gefunden:</strong><br>
-                ${notFoundSkus.join(', ')}
+                ${uniqueNotFoundSkus.join(', ')}
             </div>
         `;
     } else {
