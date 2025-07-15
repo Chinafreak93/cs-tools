@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="entry-screens-with-csv.css">
     <div id="main">
     <h1>Entry-Screen-Generator</h1>
+    <div id="loading-overlay" style="display: none;">
+      <div id="loading-container">
+        <div class="spinner"></div>
+        <p class="loading-text">Bitte warten … Screenshots werden erstellt</p>
+        <button id="cancel-button" style="margin-top: 1rem;">Abbrechen</button>
+      </div>
+    </div>
     <form id="upload-form">
     <label for="file" style="position: absolute; width: 0; height: 0; overflow: hidden;">
         <input type="file" id="file" name="file" accept=".xlsx">
