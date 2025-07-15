@@ -79,6 +79,18 @@
   document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
   event.currentTarget.classList.add('active');
 }
+function loadTool(path) {
+  const frame = document.getElementById('toolFrame');
+  frame.src = path;
+  closeMobileMenu();
+
+  // Aktiven Button markieren
+  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  // Scrollen an den Anfang
+  frame.contentWindow?.scrollTo?.(0, 0);
+}
   </script>
 </body>
 </html>
