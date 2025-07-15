@@ -6,7 +6,7 @@
         let imageElements = [];
         let skuCount = {};
 
-        Papa.parse('https://mmeshopcustom.blob.core.windows.net/mediamarkt-ch/cs/shop-data.csv', {
+        Papa.parse('https://chinafreak93.github.io/cs-tools/shop-data.csv', {
             download: true,
             header: true,
             complete: function(results) {
