@@ -39,7 +39,6 @@ div#content-inner {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 1rem 0;
 }
 
 div#form-container {
