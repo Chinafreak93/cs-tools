@@ -42,12 +42,14 @@ h1 {
 }
 
 .not-found-warning {
-    margin-top: 20px;
     padding: 10px;
     background-color: #ffe6e6;
     border: 1px solid #cc0000;
     color: #cc0000;
     font-weight: bold;
+    max-width: 50%;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 /* Spinner */
