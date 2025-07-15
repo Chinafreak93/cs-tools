@@ -70,6 +70,15 @@
       sidebar.classList.remove('mobile-open');
     }
   });
+
+    function loadTool(path) {
+  document.getElementById('toolFrame').src = path;
+  closeMobileMenu();
+
+  // Aktiven Button markieren
+  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
   </script>
 </body>
 </html>
