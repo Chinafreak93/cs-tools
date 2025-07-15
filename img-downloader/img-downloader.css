@@ -55,6 +55,10 @@ div#tool-outer {
   grid-gap: 1rem;
 }
 
+body#imgdownloader {
+    min-height: 100vh;
+}
+
 div#return-button {
   position: relative;
   background-color: #f2f2f2;
