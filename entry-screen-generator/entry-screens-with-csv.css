@@ -1,103 +1,127 @@
 @charset "utf-8";
 /* CSS Document */
 
+/* ========================================
+   Global Styles & Resets
+======================================== */
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-	background-color: #F2F2F2;
-	font-family: Source Sans Pro;
+  height: 100%;
+  background-color: #f5f7fa;
+  font-family: system-ui, sans-serif;
+  min-width: 1094px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Assets Downloader Tool */
-
-div#assets-downloader-tool {
-    display: none;
+a {
+  text-decoration: none;
 }
 
-/* Assets Downloader Tool END */
-
-/* Tool Layout */
-
+/* ========================================
+   Form Layout
+======================================== */
 form#upload-form {
-    max-width: 80%;
-    margin: auto;
-    padding: 1rem;
-    border: solid 2px #ddd;
-    border-radius: 1rem;
-    background-color: white;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
+  max-width: 80%;
+  margin: auto;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 1rem;
+  background-color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ========================================
+   Output
+======================================== */
+div#output {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ========================================
+   Buttons
+======================================== */
+button {
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 button#screenshot-button {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #28a745;
 }
 
-button#resetButton {
-	background-color: #DF0000;
-	color: white;
+button#resetButton,
+button#reset-button {
+  background-color: #df0000;
 }
 
 button#download-button {
-    color: white;
-    background-color: black;
-}
-
-button#reset-button {
-    background-color: #df0000;
-    color: white;
+  background-color: black;
 }
 
 button#template-button {
-    background-color: orange;
-    color: white;
+  background-color: orange;
 }
 
+/* ========================================
+   Button Row
+======================================== */
 .button-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-input:not(.row > input) {
-    background: white;
-    border: 1px solid #ccc;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #333;
-    padding: 8px;
-    border-radius: 5px;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-	margin-top: 0.5rem;
+/* ========================================
+   Inputs
+======================================== */
+input:not(.row > input),
+textarea,
+select {
+  background: white;
+  border: 1px solid #ccc;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  color: #333;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
 }
 
-button {
-    border-radius: 50px;
-    color: #444444;
-    font-weight: bold;
-    font-size: 16px;
-	display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: none;
-    text-align: center;
-    box-sizing: border-box;
-    -webkit-box-shadow: 1px 1px 5px silver;
-    box-shadow: 1px 1px 5px silver;
-    margin: 0 auto;
-    margin: auto 0;
+/* ========================================
+   Hidden Tool Container
+======================================== */
+div#assets-downloader-tool {
+  display: none;
 }
 
 /* Tool Laout END */
