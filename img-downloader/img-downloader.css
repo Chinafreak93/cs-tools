@@ -60,6 +60,11 @@ div#tool-outer {
   border-bottom: 1px solid #ccc;
 }
 
+#tool-outer.sticky-active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
 body#imgdownloader {
     min-height: 100vh;
 }
