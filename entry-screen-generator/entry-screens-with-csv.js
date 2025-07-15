@@ -67,20 +67,26 @@ async function mergeDataAndGenerateHTML() {
 
     for (const excelItem of excelData) {
         const excelSku = excelItem.sku ? excelItem.sku.toString().trim() : '';
+
+        // ⚠️ Wenn keine SKU im Excel → überspringen
+        if (!excelSku) continue;
+
         const csvItem = csvData.find(item => item.sku && item.sku.toString().trim() === excelSku);
+
         if (csvItem) {
             console.log('Übereinstimmendes Produkt gefunden:', csvItem);
-            let mergedItem = { ...csvItem, ...excelItem };
+            const mergedItem = { ...csvItem, ...excelItem };
             displayedData.push(mergedItem);
         } else {
             console.log('Produkt in CSV nicht gefunden:', excelSku);
-            displayedData.push(excelItem);
+            displayedData.push(excelItem); // manuell gepflegter Eintrag
             notFoundSkus.push(excelSku);
         }
     }
 
     document.getElementById('output').innerHTML = '';
     imageElements = [];
+
     for (const item of displayedData) {
         await generateHTML(item);
     }
