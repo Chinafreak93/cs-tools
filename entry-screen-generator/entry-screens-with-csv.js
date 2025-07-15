@@ -270,7 +270,7 @@
 
         document.getElementById('template-button').addEventListener('click', function() {
             const link = document.createElement('a');
-            link.href = 'https://chinafreak93.github.io/cs-tools/entry-screens-generator/entry-screen-mit-csv-vorlage.xlsx';
+            link.href = 'https://chinafreak93.github.io/cs-tools/entry-screen-generator/entry-screen-mit-csv-vorlage.xlsx';
             link.download = 'entry-screen-mit-csv-vorlage.xlsx';
             document.body.appendChild(link);
             link.click();
