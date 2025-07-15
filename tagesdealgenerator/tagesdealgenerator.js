@@ -56,32 +56,40 @@ async function mergeDataAndGenerateHTML() {
     displayedData = [];
     let notFoundItems = [];
 
-	for (const excelItem of excelData) {
-    if (!excelItem || !excelItem.sku) {
-        console.log('Ungültiges Excel-Element:', excelItem);
-        continue; // Überspringe ungültige Elemente
+    for (const excelItem of excelData) {
+        if (!excelItem || !excelItem.sku) {
+            console.log('❌ Ungültiges Excel-Element:', excelItem);
+            continue;
+        }
+
+        const excelSku = excelItem.sku.toString().trim();
+        const matchingCsvItems = csvData.filter(item => item.sku && item.sku.toString().trim() === excelSku);
+
+        if (matchingCsvItems.length > 0) {
+            matchingCsvItems.forEach(csvItem => {
+                const mergedItem = { ...csvItem, ...excelItem };
+                displayedData.push(mergedItem);
+            });
+        } else {
+            console.log('🔍 Produkt in CSV nicht gefunden:', excelSku);
+
+            // Nur hinzufügen, wenn ein Bildlink vorhanden ist
+            if (excelItem.image_link && excelItem.image_link.trim() !== '') {
+                displayedData.push(excelItem);
+            } else {
+                console.log('⚠️ Kein Bildlink vorhanden → wird nicht angezeigt:', excelSku);
+            }
+
+            notFoundItems.push(excelSku);
+        }
     }
 
-    const excelSku = excelItem.sku.toString().trim();
-    const matchingCsvItems = csvData.filter(item => item.sku.toString().trim() === excelSku);
-	if (matchingCsvItems.length > 0) {
-		matchingCsvItems.forEach(csvItem => {
-			const mergedItem = { ...csvItem, ...excelItem };
-			displayedData.push(mergedItem);
-		});
-	} else {
-		console.log('Produkt in CSV nicht gefunden:', excelSku);
-		notFoundItems.push(excelSku);
-	}
-	}
-
-    // Überprüfen, ob das not-found-div bereits existiert, und es ggf. entfernen
+    // Not-Found-Info aktualisieren
     const existingNotFoundDiv = document.getElementById('not-found-div');
     if (existingNotFoundDiv) {
         existingNotFoundDiv.remove();
     }
 
-    // Anzeige der nicht gefundenen Artikelnummern im separaten <p> Element
     if (notFoundItems.length > 0) {
         const notFoundDiv = document.createElement('div');
         notFoundDiv.id = 'not-found-div';
@@ -89,21 +97,26 @@ async function mergeDataAndGenerateHTML() {
         notFoundParagraph.innerHTML = `<strong>Diese Artikelnummern wurden nicht gefunden:</strong> ${notFoundItems.join(', ')}`;
         notFoundDiv.appendChild(notFoundParagraph);
 
-        // Füge das not-found-div zwischen upload-form und output ein
         const uploadForm = document.getElementById('upload-form');
         const outputDiv = document.getElementById('output');
         uploadForm.parentNode.insertBefore(notFoundDiv, outputDiv);
     }
 
+    // HTML generieren
     document.getElementById('output').innerHTML = '';
     imageElements = [];
+
     for (const item of displayedData) {
+        if (!item.sku || item.sku.toString().trim() === '') continue;
+        if (!item.image_link || item.image_link.trim() === '') continue;
+
         await generateHTML(item);
     }
 
     document.getElementById('download-button').disabled = false;
     document.getElementById('screenshot-button').disabled = false;
 }
+
 
     async function generateHTML(product) {
 		let energyLabel = '';
