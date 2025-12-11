@@ -2,90 +2,15 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claudias Tool Übersicht</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="cs-tools.css">
+  <title>Weiterleitung …</title>
+  <meta http-equiv="refresh" content="0; url=https://specials.mediamarkt.ch/x-claudias-tools/">
 </head>
 <body>
-  <!-- Hamburger Button nur für Mobil -->
-  <button id="mobileMenuBtn" onclick="toggleMobileMenu()">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="sidebar" id="sidebar">
-    <h2>Tools Übersicht</h2>
-    <button id="defaultToolBtn" onclick="loadTool('number-converter/text-converter-1.1.html', this)">
-      <i class="fas fa-sort-numeric-down"></i> <span class="text">Number Converter</span>
-    </button>
-    <button onclick="loadTool('img-downloader/img-downloader-v2.2.html', this)">
-      <i class="fas fa-image"></i> <span class="text">Bild Downloader</span>
-    </button>
-    <button onclick="loadTool('tagesdealgenerator/dailydeal-with-csv-2.8.html', this)">
-      <i class="fas fa-bolt"></i> <span class="text">Tagesdeal Generator</span>
-    </button>
-    <button onclick="loadTool('entry-screen-generator/entry-screens-with-csv_v1.1.html', this)">
-      <i class="fas fa-tv"></i> <span class="text">Entry Screen Generator</span>
-    </button>
-    <button onclick="loadTool('webp-converter.html', this)">
-      <i class="fas fa-arrows-rotate"></i> <span class="text">WEBP Converter</span>
-    </button>
-    <button onclick="loadTool('bf-overview/blackfriday-overview.html', this)">
-      <i class="fas fa-eye"></i> <span class="text">Black Friday Overview</span>
-    </button>
-  </div>
-
-  <!-- Desktop Toggle Button -->
-  <button id="toggleSidebarBtn" onclick="toggleSidebar()">
-    <i class="fas fa-angle-left"></i>
-  </button>
-
-  <iframe id="toolFrame" class="content" src="number-converter/text-converter-1.1.html"></iframe>
-
-  <script>
-function loadTool(path, buttonElement) {
-  // Wenn der geklickte Button schon aktiv ist, nichts tun
-  if (buttonElement.classList.contains('active')) return;
-
-  const frame = document.getElementById('toolFrame');
-  frame.src = path;
-  closeMobileMenu();
-
-  // Aktiven Button markieren
-  document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
-  buttonElement.classList.add('active');
-
-  // Scrollen an den Anfang (optional, falls nötig)
-  frame.contentWindow?.scrollTo?.(0, 0);
-}
-
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const icon = document.querySelector('#toggleSidebarBtn i');
-      sidebar.classList.toggle('collapsed');
-      icon.classList.toggle('fa-angle-left');
-      icon.classList.toggle('fa-angle-right');
-    }
-
-    function toggleMobileMenu() {
-      document.getElementById('sidebar').classList.toggle('mobile-open');
-    }
-
-    function closeMobileMenu() {
-      document.getElementById('sidebar').classList.remove('mobile-open');
-    }
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 768) {
-        document.getElementById('sidebar').classList.remove('mobile-open');
-      }
-    });
-
-    window.addEventListener('DOMContentLoaded', function () {
-      // Standard-Button als aktiv markieren
-      document.getElementById('defaultToolBtn')?.classList.add('active');
-    });
-  </script>
+  <p>
+    Du wirst weitergeleitet …
+    <a href="https://specials.mediamarkt.ch/x-claudias-tools/">
+      Hier klicken, falls nichts passiert.
+    </a>
+  </p>
 </body>
 </html>
